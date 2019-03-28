@@ -13,7 +13,7 @@ namespace RentCar
 {
     public partial class AgregarVehiculo : Form
     {
-        SqlConnection con = null;
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
         public AgregarVehiculo()
         {
             InitializeComponent();
@@ -36,7 +36,8 @@ namespace RentCar
                 }
                 else
                 {
-                    con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+
+                    
                     con.Open();
                     string sql1 = " INSERT INTO Vehiculos (MarcaVehiculos,ModeloVehiculos,TipoCombustible,TipoVehiculo,NoChasis,NoMotor,NoPlaca,DescripcionVehiculo,Disponibilidad) VALUES (@MarcaVehiculos,@ModeloVehiculos,@TipoCombustible, @TipoVehiculo,@Nochasis,@NoMotor,@NoPlaca,@Descripcion,@Disponibilidad) ";
                     //string sql2 = " INSERT INTO Marca (Marca_Nombre, Modelo_Nombre) VALUES (@MarcaNombre, @ModeloNombre) ";
@@ -86,7 +87,7 @@ namespace RentCar
         {
             try
             {
-                SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                
                 con.Open();
                 //creacion de tabla intermedia
                 DataTable tbl1 = new DataTable();
@@ -134,7 +135,7 @@ namespace RentCar
 
         private void CmbMarca_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+           
             con.Open();
 
             DataTable tbl2 = new DataTable();

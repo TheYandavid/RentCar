@@ -14,7 +14,7 @@ namespace RentCar
     public partial class EditarInspeccion : Form
     {
 
-        SqlConnection con = null;
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
         public EditarInspeccion()
         {
             InitializeComponent();
@@ -24,7 +24,7 @@ namespace RentCar
         {
             try
             {
-                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                
                 con.Open();
                 string sqlUpdate = "UPDATE InspeccionV  SET IdVehiculo = " + "'" + CmbIdVehiculo.SelectedValue + "'" + ", IdCliente = " + "'" + CmbIdCliente.SelectedValue + "'" + ", Ralladuras = " + "'" + CmbRalladuras.Text + "'" + ", CantidadCombustible = " + "'" + CmbCombustible.Text + "'" + ", GomaRespuesto = " + "'" + CmbGomaRepuesto.Text + "'" + ",Gato = " + "'" + CmbGato.Text + "'" + "'" + ",RoturaCristal = " + "'" + CmbRoturaCristal.Text + "'" + ",EstadoGomas = " + "'" + CmbEstadoGomas.Text + "'" + ",FechaInspeccion = " + "'" + DtpFechaInspeccion.Value.ToString("yyyy/M/d") + "'" + ",IdEmpleado = " + "'" + CmbIdEmpleado.Text + "where IdInspeccion = " + "'" + cmbIDInsp.SelectedValue + "'" + " ";
                 SqlCommand comando = new SqlCommand(sqlUpdate, con);
@@ -45,7 +45,7 @@ namespace RentCar
 
         private void cargarCombobox() {
 
-            SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            
             con.Open();
             //creacion de tabla intermedia
 
@@ -98,7 +98,7 @@ namespace RentCar
         {
              try
             {
-                SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                
                 con.Open();
 
                 DataTable tbl1 = new DataTable();

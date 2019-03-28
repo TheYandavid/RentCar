@@ -14,7 +14,7 @@ namespace RentCar
     public partial class Inspeccion : Form
     {
 
-        SqlConnection con = null;
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
         public Inspeccion()
         {
             InitializeComponent();
@@ -39,7 +39,7 @@ namespace RentCar
         {
 
 
-            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            
             con.Open();
             string sql = "select * from InspeccionV ";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
@@ -60,7 +60,7 @@ namespace RentCar
             try
             {
 
-                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                
                 con.Open();
                 string sql = "DELETE FROM InspeccionV WHERE IdVehiculos = " + "'" + TxtIdInspeccion.Text + "'" + "";
                 SqlCommand comando = new SqlCommand(sql, con);

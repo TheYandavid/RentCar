@@ -14,8 +14,8 @@ namespace RentCar
     public partial class Rentar : Form
     {
         private string fecha_inicio, Fecha_Fin;
-        SqlConnection con = null;
-       
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+
         public Rentar()
         {
             InitializeComponent();
@@ -43,7 +43,7 @@ namespace RentCar
         {
             try
             {
-                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                
                 con.Open();
                 string sql = "INSERT INTO Renta (IdVehiculo,IdEmpleado,IdCliente,FechaRenta,DepositoRenta,MontoXdia,CantidadDias,Comentario,FechaDevolucion) VALUES (@IdVehiculo,@IdEmpleado,@IdCliente,@FechaRenta,@DepositoRenta,@MontoXdia,@CantidadDias,@Comentario,@FechaDevolucion)";
                 string sql2 = "UPDATE Vehiculos SET Disponibilidad  = 'Rentado' where IdVehiculos = "  +  "'" +CmbIdVehiculo.SelectedValue+ "'" + "";
@@ -90,7 +90,7 @@ namespace RentCar
         private void cargarCombobox()
         {
 
-            SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+           
             con.Open();
             //creacion de tabla intermedia
 
@@ -157,7 +157,7 @@ namespace RentCar
         {
             try
             {
-                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                
                 con.Open();
                 string sql = "select * from Vehiculos";
                 sql += " where IdVehiculos LIKE '" + CmbMarca.SelectedValue + "%' ";
@@ -179,7 +179,7 @@ namespace RentCar
         private void mostrarTabla()
         {
 
-            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            
             con.Open();
             string sql = "select * from Vehiculos";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
@@ -231,7 +231,7 @@ namespace RentCar
 
         private void valdiarDis() {
 
-            SqlConnection conLogin = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            
             conLogin.Open();
             string sqlLogin = "Select Disponibilidad from Vehiculos where Disponibilidad = 'Disponible' and  IdVehiculos =" + "'"+ CmbIdVehiculo.SelectedValue + "'" + " ";
             SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, conLogin);

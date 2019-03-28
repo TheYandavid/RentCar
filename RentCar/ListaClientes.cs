@@ -13,7 +13,7 @@ namespace RentCar
 {
     public partial class ListaClientes : Form
     {
-        SqlConnection con = null;
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
         public ListaClientes()
         {
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace RentCar
             try
             {
 
-                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+               
                 con.Open();
                 string sql = "DELETE FROM Cliente WHERE IdCliente = " + "'" + TxtId.Text + "'" + "";
                 SqlCommand comando = new SqlCommand(sql, con);
@@ -59,7 +59,7 @@ namespace RentCar
         {
 
 
-            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            
             con.Open();
             string sql = "select * from Cliente";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
