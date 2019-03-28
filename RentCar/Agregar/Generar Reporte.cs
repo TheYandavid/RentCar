@@ -38,15 +38,15 @@ namespace RentCar.Agregar
         private void BtReporteRenta_Click(object sender, EventArgs e)
         {
             ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
+            SendMessage(this.Handle, 0x012, 0xf050, 0);
 
-            if (panel1.Width == 500)
+            if (panel1.Width == 900)
             {
                 panel1.Width = 150;
             }
             else
             {
-                panel1.Width = 500;
+                panel1.Width = 900;
             }
         }
 
@@ -98,6 +98,23 @@ namespace RentCar.Agregar
         private void Generar_Reporte_Load(object sender, EventArgs e)
         {
             cargartabla();
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void BtSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

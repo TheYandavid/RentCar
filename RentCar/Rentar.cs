@@ -232,9 +232,9 @@ namespace RentCar
         private void valdiarDis() {
 
             
-            conLogin.Open();
+            con.Open();
             string sqlLogin = "Select Disponibilidad from Vehiculos where Disponibilidad = 'Disponible' and  IdVehiculos =" + "'"+ CmbIdVehiculo.SelectedValue + "'" + " ";
-            SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, conLogin);
+            SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, con);
             DataTable dta = new DataTable();
             sda.Fill(dta);
 
