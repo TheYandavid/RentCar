@@ -13,7 +13,7 @@ namespace RentCar
 {
     public partial class HistoRentas : Form
     {
-        SqlConnection con = null;
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
         public HistoRentas()
         {
             InitializeComponent();
@@ -39,7 +39,7 @@ namespace RentCar
             try
             {
 
-                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                
                 con.Open();
                 string sql = "Select * from Renta WHERE IdRenta = " + "'" + TxtIdRenta.Text + "'" + "";
                 SqlCommand comando = new SqlCommand(sql, con);
@@ -65,7 +65,7 @@ namespace RentCar
         {
             try
             {
-                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                
                 con.Open();
                 string sql = "select * from Renta";
                 SqlDataAdapter da = new SqlDataAdapter(sql, con);

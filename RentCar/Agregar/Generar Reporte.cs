@@ -18,7 +18,7 @@ namespace RentCar.Agregar
 {
     public partial class Generar_Reporte : Form
     {
-
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
         DataTable dt = new DataTable();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -78,7 +78,7 @@ namespace RentCar.Agregar
 
         private void cargartabla() {
 
-            SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            
             con.Open();
             string SQL = "select * from Renta ";
             

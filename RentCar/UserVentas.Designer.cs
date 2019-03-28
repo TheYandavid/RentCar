@@ -77,6 +77,7 @@
             this.BtRentar.TabIndex = 0;
             this.BtRentar.Text = "Rentar";
             this.BtRentar.UseVisualStyleBackColor = true;
+            this.BtRentar.Click += new System.EventHandler(this.BtRentar_Click_1);
             // 
             // btRegistCliente
             // 

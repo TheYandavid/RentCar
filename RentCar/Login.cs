@@ -13,6 +13,7 @@ namespace RentCar
 {
     public partial class Login : Form
     {
+        SqlConnection conLogin = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
         public Login()
         {
             InitializeComponent();
@@ -78,7 +79,7 @@ namespace RentCar
             try
             {
 
-                SqlConnection conLogin = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                
                 conLogin.Open();
                 string sqlLogin = "Select IdEmpleado,CedulaEmpleado from Empleado where IdEmpleado like " + TxtIDLogin.Text + " and CedulaEmpleado like " + TxtCedulaLogin.Text + " ";
                 SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, conLogin);
@@ -118,7 +119,7 @@ namespace RentCar
 
         private void logadmin() {
 
-            SqlConnection conLogin = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            
             conLogin.Open();
             string sqlLogin = "Select TipoEmpleado from Empleado where IdEmpleado like " + TxtIDLogin.Text + "and TipoEmpleado = " + "'Administrativo'" + " ";
             SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, conLogin);
@@ -145,7 +146,7 @@ namespace RentCar
         private void logventa()
         {
 
-            SqlConnection conLogin = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            
             conLogin.Open();
             string sqlLogin = "Select TipoEmpleado from Empleado where IdEmpleado like " + TxtIDLogin.Text + "and TipoEmpleado = " + "'Ventas'" + " ";
             SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, conLogin);
