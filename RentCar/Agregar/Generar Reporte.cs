@@ -13,11 +13,13 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using System.Data.SqlClient;
-
+using RentCar.Clases;
 namespace RentCar.Agregar
 {
     public partial class Generar_Reporte : Form
     {
+
+        DataTable dt = new DataTable();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -50,50 +52,53 @@ namespace RentCar.Agregar
 
         private void BtGenerarReport_Click(object sender, EventArgs e)
         {
+            
 
-          
+            try
+            {
+                Reporte.writeFileHeader("sep=,");
+                Reporte.writeFileLine("ID Renta, ID Articulo, ID Cliente, FechaRenta, DepositoRenta, MontoXdia, CantidadDias, Comentario, FechaDevolucion ");
+                foreach (DataRow row in dt.Rows)
+                {
+                    string linea = "";
+                    foreach (DataColumn dc in dt.Columns)
+                    {
+                        linea += row[dc].ToString() + ",";
+                    }
+                    Reporte.writeFileLine(linea);
+                }
+                Process.Start(@"D:\prueba.csv");
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("" + ex.Message);
+            }
+        }
+
+        private void cargartabla() {
 
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
             con.Open();
             string SQL = "select * from Renta ";
-            DataTable Dt = new DataTable();
-
-           
-            SqlDataAdapter oDa = new SqlDataAdapter(SQL, con);
-
-            Dt = new DataTable();
-            oDa.Fill(Dt);
             
 
-            writeFileHeader("ID Renta, ID Articulo, ID Cliente, FechaRenta ,DepositoRenta ,MontoXdia ,CantidadDias ,Comentario ,FechaDevolucion ");
+            SqlDataAdapter oDa = new SqlDataAdapter(SQL, con);
 
-                foreach (DataRow row in Dt.Rows)
-                {
-                    string linea = "";
-                    foreach (DataColumn dc in Dt.Columns)
-                    {
-                        linea += row[dc].ToString() + ",";
-                    }
-                    writeFileLine(linea);
-                }
+            dt = new DataTable();
+            oDa.Fill(dt);
+            DtRenta.DataSource = dt;
+                
 
-                Process.Start(@"D:\prueba.xls");
-         }
 
-            private void writeFileLine(string pLine)
-            {
-                using (System.IO.StreamWriter w = File.AppendText("D:\\prueba.xls"))
-                {
-                    w.WriteLine(pLine);
-                }
-            }
-            private void writeFileHeader(string pLine)
-            {
-                using (System.IO.StreamWriter w = File.CreateText("D:\\prueba.xls"))
-                {
-                    w.WriteLine(pLine);
-                }
-            }
+
+
+
+        }
+        private void Generar_Reporte_Load(object sender, EventArgs e)
+        {
+            cargartabla();
         }
     }
+}
 

@@ -71,6 +71,7 @@
     <Compile Include="Agregar\Generar Reporte.Designer.cs">
       <DependentUpon>Generar Reporte.cs</DependentUpon>
     </Compile>
+    <Compile Include="Clases\Reporte.cs" />
     <Compile Include="Editar\EditarVe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,7 +169,7 @@
     <Compile Include="UserVentas.Designer.cs">
       <DependentUpon>UserVentas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Validar.cs" />
+    <Compile Include="Clases\Validar.cs" />
     <EmbeddedResource Include="Agregar\AgregarInspeccion.resx">
       <DependentUpon>AgregarInspeccion.cs</DependentUpon>
     </EmbeddedResource>
