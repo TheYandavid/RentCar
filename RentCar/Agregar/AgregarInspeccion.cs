@@ -13,7 +13,7 @@ namespace RentCar
 {
     public partial class AgregarInspeccion : Form
     {
-        SqlConnection con = null;
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
         public AgregarInspeccion()
         {
             InitializeComponent();
@@ -22,7 +22,7 @@ namespace RentCar
         private void AgregarInspeccion_Load(object sender, EventArgs e)
         {
 
-            SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            
             con.Open();
             //creacion de tabla intermedia
 
@@ -82,7 +82,7 @@ namespace RentCar
                 {
 
                 }
-                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                
                 con.Open();
                 string sql = " INSERT INTO InspeccionV (IdVehiculo,IdCliente,Ralladuras,CantidadCombustible,GomaRespuesto,Gato,RoturaCristal,EstadoGomas,FechaInspeccion,IdEmpleado) VALUES (@IdVehiculo,@IdCliente, @Ralladuras,@CantidadCombustible,@GomaRespuesto,@Gato,@RoturaCristal,@EstadoGomas,@FechaInspeccion,@IdEmpleado) ";
                 SqlCommand comando = new SqlCommand(sql, con);
@@ -103,7 +103,7 @@ namespace RentCar
                 
                 MessageBox.Show("Ha sido registrada la inspeccion");
 
-                this.Close();
+                
                 con.Close();
             }
 

@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using RentCar.Clases;
 
 namespace RentCar
 {
     public partial class Form1 : Form
+
     {
-        SqlConnection con = null;
+        
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
         public Form1()
         {
             InitializeComponent();
@@ -39,10 +42,10 @@ namespace RentCar
 
         private void ejecutarConsulta()
         {
-
+            
             try
             {
-                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+               
                 con.Open();
                 string sql = "select * from Vehiculos";
                 sql += " where MarcaVehiculos LIKE '" + CmbMarca.Text +"%' ";
@@ -51,6 +54,7 @@ namespace RentCar
                 da.Fill(dt);
                 dgvVehiculos.DataSource = dt;
                 dgvVehiculos.Refresh();
+                con.Close();
             }
             catch (Exception ex)
             {
@@ -65,7 +69,7 @@ namespace RentCar
         private void mostrarTabla()
         {
 
-            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            
             con.Open();
             string sql = "select * from Vehiculos";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
@@ -73,7 +77,7 @@ namespace RentCar
             da.Fill(dt);
             dgvVehiculos.DataSource = dt;
             dgvVehiculos.Refresh();
-
+            con.Close();
 
         }
 
@@ -90,7 +94,7 @@ namespace RentCar
 
         private void cargarcmb() {
 
-            SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            
             con.Open();
             //creacion de tabla intermedia
 

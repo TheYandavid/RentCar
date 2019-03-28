@@ -71,6 +71,7 @@
     <Compile Include="Agregar\Generar Reporte.Designer.cs">
       <DependentUpon>Generar Reporte.cs</DependentUpon>
     </Compile>
+    <Compile Include="Clases\Conexion.cs" />
     <Compile Include="Clases\Reporte.cs" />
     <Compile Include="Editar\EditarVe.cs">
       <SubType>Form</SubType>
