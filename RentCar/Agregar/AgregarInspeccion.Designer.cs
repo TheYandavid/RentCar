@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarInspeccion));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.DtpFechaInspeccion = new System.Windows.Forms.DateTimePicker();
             this.CmbIdEmpleado = new System.Windows.Forms.ComboBox();
             this.CmbIdCliente = new System.Windows.Forms.ComboBox();
             this.CmbIdVehiculo = new System.Windows.Forms.ComboBox();
@@ -49,8 +51,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.DtpFechaInspeccion = new System.Windows.Forms.DateTimePicker();
+            this.BtSalir = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -81,6 +85,13 @@
             this.panel1.Size = new System.Drawing.Size(526, 392);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // DtpFechaInspeccion
+            // 
+            this.DtpFechaInspeccion.Location = new System.Drawing.Point(193, 319);
+            this.DtpFechaInspeccion.Name = "DtpFechaInspeccion";
+            this.DtpFechaInspeccion.Size = new System.Drawing.Size(121, 20);
+            this.DtpFechaInspeccion.TabIndex = 30;
             // 
             // CmbIdEmpleado
             // 
@@ -281,24 +292,41 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "ID Vehiculo";
             // 
-            // DtpFechaInspeccion
+            // BtSalir
             // 
-            this.DtpFechaInspeccion.Location = new System.Drawing.Point(193, 319);
-            this.DtpFechaInspeccion.Name = "DtpFechaInspeccion";
-            this.DtpFechaInspeccion.Size = new System.Drawing.Size(121, 20);
-            this.DtpFechaInspeccion.TabIndex = 30;
+            this.BtSalir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtSalir.BackgroundImage")));
+            this.BtSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtSalir.Location = new System.Drawing.Point(546, 0);
+            this.BtSalir.Name = "BtSalir";
+            this.BtSalir.Size = new System.Drawing.Size(52, 35);
+            this.BtSalir.TabIndex = 5;
+            this.BtSalir.UseVisualStyleBackColor = true;
+            this.BtSalir.Click += new System.EventHandler(this.BtSalir_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.BtSalir);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(598, 35);
+            this.panel2.TabIndex = 6;
+            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             // 
             // AgregarInspeccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(598, 450);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AgregarInspeccion";
             this.Text = "AgregarInspeccion";
             this.Load += new System.EventHandler(this.AgregarInspeccion_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -327,5 +355,7 @@
         private System.Windows.Forms.ComboBox CmbIdVehiculo;
         private System.Windows.Forms.ComboBox CmbIdEmpleado;
         private System.Windows.Forms.DateTimePicker DtpFechaInspeccion;
+        private System.Windows.Forms.Button BtSalir;
+        private System.Windows.Forms.Panel panel2;
     }
 }

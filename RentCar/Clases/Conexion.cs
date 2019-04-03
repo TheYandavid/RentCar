@@ -5,28 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Configuration;
+
 namespace RentCar.Clases
 {
-     class Conexion
+    class Conexion
     {
-        private static void SqlConexion()
-        {
-            try
-            {
-                SqlConnection con;
-                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+       
+        static string connectionStr = ConfigurationManager.ConnectionStrings["RentCar.Properties.Settings.RentCarConnectionString"].ConnectionString;
 
-                return;
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show("Se ha creado un error al establecer la conexion SQL :" + ex);
-            }
-          
-        }
         
-      
+       public static SqlConnection getSqlConexion()
+        {
+           
+          
+           
+            return new SqlConnection(connectionStr);
 
+        }
     }
 }

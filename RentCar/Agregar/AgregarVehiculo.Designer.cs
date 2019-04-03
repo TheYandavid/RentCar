@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarVehiculo));
             this.TxtNuChasis = new System.Windows.Forms.TextBox();
             this.TxtNuMotor = new System.Windows.Forms.TextBox();
             this.TxtTipoVehiculo = new System.Windows.Forms.TextBox();
@@ -46,6 +47,9 @@
             this.CmbModelo = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.CmbTipoCombustible = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.BtSalir = new System.Windows.Forms.Button();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TxtNuChasis
@@ -189,7 +193,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(410, 22);
+            this.button1.Location = new System.Drawing.Point(404, 44);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 21);
             this.button1.TabIndex = 24;
@@ -209,11 +213,33 @@
             this.CmbTipoCombustible.Size = new System.Drawing.Size(140, 21);
             this.CmbTipoCombustible.TabIndex = 26;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.BtSalir);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(563, 38);
+            this.panel1.TabIndex = 27;
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            // 
+            // BtSalir
+            // 
+            this.BtSalir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtSalir.BackgroundImage")));
+            this.BtSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtSalir.Location = new System.Drawing.Point(508, 3);
+            this.BtSalir.Name = "BtSalir";
+            this.BtSalir.Size = new System.Drawing.Size(52, 35);
+            this.BtSalir.TabIndex = 6;
+            this.BtSalir.UseVisualStyleBackColor = true;
+            this.BtSalir.Click += new System.EventHandler(this.BtSalir_Click);
+            // 
             // AgregarVehiculo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(563, 416);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.CmbTipoCombustible);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.CmbModelo);
@@ -232,9 +258,11 @@
             this.Controls.Add(this.TxtTipoVehiculo);
             this.Controls.Add(this.TxtNuMotor);
             this.Controls.Add(this.TxtNuChasis);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AgregarVehiculo";
             this.Text = "AgregarVehiculo";
             this.Load += new System.EventHandler(this.AgregarVehiculo_Load);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -259,5 +287,7 @@
         private System.Windows.Forms.ComboBox CmbModelo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox CmbTipoCombustible;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button BtSalir;
     }
 }

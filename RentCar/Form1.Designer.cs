@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvVehiculos = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -36,10 +37,13 @@
             this.CmbMarca = new System.Windows.Forms.ComboBox();
             this.BtBuscar = new System.Windows.Forms.Button();
             this.vehiculosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.BtSalir = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculos)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.vehiculosBindingSource)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -66,7 +70,7 @@
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.CmbMarca);
             this.panel2.Controls.Add(this.BtBuscar);
-            this.panel2.Location = new System.Drawing.Point(12, 26);
+            this.panel2.Location = new System.Drawing.Point(12, 41);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(411, 73);
             this.panel2.TabIndex = 1;
@@ -103,13 +107,36 @@
             // 
             this.vehiculosBindingSource.DataMember = "Vehiculos";
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.BtSalir);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(974, 35);
+            this.panel3.TabIndex = 2;
+            this.panel3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel3_MouseDown);
+            // 
+            // BtSalir
+            // 
+            this.BtSalir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtSalir.BackgroundImage")));
+            this.BtSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtSalir.Location = new System.Drawing.Point(926, 0);
+            this.BtSalir.Name = "BtSalir";
+            this.BtSalir.Size = new System.Drawing.Size(45, 32);
+            this.BtSalir.TabIndex = 3;
+            this.BtSalir.UseVisualStyleBackColor = true;
+            this.BtSalir.Click += new System.EventHandler(this.BtSalir_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(974, 450);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -118,6 +145,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.vehiculosBindingSource)).EndInit();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -133,6 +161,8 @@
         private System.Windows.Forms.BindingSource vehiculosBindingSource;
         private RentCarDataSetTableAdapters.VehiculosTableAdapter vehiculosTableAdapter;
         private System.Windows.Forms.DataGridView dgvVehiculos;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button BtSalir;
     }
 }
 

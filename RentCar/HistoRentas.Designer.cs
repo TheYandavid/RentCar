@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistoRentas));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnMostrar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.TxtIdRenta = new System.Windows.Forms.TextBox();
             this.btBuscar = new System.Windows.Forms.Button();
@@ -39,13 +41,15 @@
             this.rentCarDataSet1 = new RentCar.RentCarDataSet();
             this.rentaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rentaTableAdapter1 = new RentCar.RentCarDataSetTableAdapters.RentaTableAdapter();
-            this.btnMostrar = new System.Windows.Forms.Button();
+            this.BtSalir = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvRenta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rentaBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rentCarDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rentaBindingSource)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -54,10 +58,20 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.TxtIdRenta);
             this.panel1.Controls.Add(this.btBuscar);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(13, 29);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(773, 50);
             this.panel1.TabIndex = 1;
+            // 
+            // btnMostrar
+            // 
+            this.btnMostrar.Location = new System.Drawing.Point(564, 12);
+            this.btnMostrar.Name = "btnMostrar";
+            this.btnMostrar.Size = new System.Drawing.Size(142, 23);
+            this.btnMostrar.TabIndex = 4;
+            this.btnMostrar.Text = "Mostrar toda las rentas";
+            this.btnMostrar.UseVisualStyleBackColor = true;
+            this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
             // 
             // label1
             // 
@@ -90,9 +104,9 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.DgvRenta);
-            this.panel2.Location = new System.Drawing.Point(12, 68);
+            this.panel2.Location = new System.Drawing.Point(12, 85);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(958, 287);
+            this.panel2.Size = new System.Drawing.Size(958, 270);
             this.panel2.TabIndex = 2;
             // 
             // DgvRenta
@@ -100,7 +114,7 @@
             this.DgvRenta.AllowUserToAddRows = false;
             this.DgvRenta.AllowUserToDeleteRows = false;
             this.DgvRenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvRenta.Location = new System.Drawing.Point(4, 3);
+            this.DgvRenta.Location = new System.Drawing.Point(1, 19);
             this.DgvRenta.Name = "DgvRenta";
             this.DgvRenta.ReadOnly = true;
             this.DgvRenta.Size = new System.Drawing.Size(951, 265);
@@ -124,23 +138,36 @@
             // 
             this.rentaTableAdapter1.ClearBeforeFill = true;
             // 
-            // btnMostrar
+            // BtSalir
             // 
-            this.btnMostrar.Location = new System.Drawing.Point(564, 12);
-            this.btnMostrar.Name = "btnMostrar";
-            this.btnMostrar.Size = new System.Drawing.Size(142, 23);
-            this.btnMostrar.TabIndex = 4;
-            this.btnMostrar.Text = "Mostrar toda las rentas";
-            this.btnMostrar.UseVisualStyleBackColor = true;
-            this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
+            this.BtSalir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtSalir.BackgroundImage")));
+            this.BtSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtSalir.Location = new System.Drawing.Point(943, 0);
+            this.BtSalir.Name = "BtSalir";
+            this.BtSalir.Size = new System.Drawing.Size(33, 23);
+            this.BtSalir.TabIndex = 4;
+            this.BtSalir.UseVisualStyleBackColor = true;
+            this.BtSalir.Click += new System.EventHandler(this.BtSalir_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.BtSalir);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(976, 23);
+            this.panel3.TabIndex = 5;
+            this.panel3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel3_MouseDown);
             // 
             // HistoRentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(976, 367);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "HistoRentas";
             this.Text = "HistoRentas";
             this.Load += new System.EventHandler(this.HistoRentas_Load);
@@ -151,6 +178,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.rentaBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rentCarDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rentaBindingSource)).EndInit();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -180,5 +208,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView DgvRenta;
         private System.Windows.Forms.Button btnMostrar;
+        private System.Windows.Forms.Button BtSalir;
+        private System.Windows.Forms.Panel panel3;
     }
 }
