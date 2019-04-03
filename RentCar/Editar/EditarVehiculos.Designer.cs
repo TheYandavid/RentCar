@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarVehiculos));
             this.vehiculosTableAdapter = new RentCar.RentCarDataSetTableAdapters.VehiculosTableAdapter();
             this.Eliminar = new System.Windows.Forms.Button();
             this.TxtId = new System.Windows.Forms.TextBox();
@@ -38,6 +39,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.DgvEditVehiculos = new System.Windows.Forms.DataGridView();
             this.Actualizar = new System.Windows.Forms.Button();
+            this.BtSalir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.vehiculosBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rentCarDataSet1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -114,19 +116,33 @@
             this.Actualizar.UseVisualStyleBackColor = true;
             this.Actualizar.Click += new System.EventHandler(this.Actualizar_Click);
             // 
+            // BtSalir
+            // 
+            this.BtSalir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtSalir.BackgroundImage")));
+            this.BtSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtSalir.Location = new System.Drawing.Point(967, 2);
+            this.BtSalir.Name = "BtSalir";
+            this.BtSalir.Size = new System.Drawing.Size(33, 23);
+            this.BtSalir.TabIndex = 25;
+            this.BtSalir.UseVisualStyleBackColor = true;
+            this.BtSalir.Click += new System.EventHandler(this.BtSalir_Click);
+            // 
             // EditarVehiculos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1003, 388);
+            this.Controls.Add(this.BtSalir);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TxtId);
             this.Controls.Add(this.Eliminar);
             this.Controls.Add(this.Actualizar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EditarVehiculos";
             this.Text = "EditarVehiculos";
             this.Load += new System.EventHandler(this.EditarVehiculos_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.EditarVehiculos_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.vehiculosBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rentCarDataSet1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -149,5 +165,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView DgvEditVehiculos;
         private System.Windows.Forms.Button Actualizar;
+        private System.Windows.Forms.Button BtSalir;
     }
 }

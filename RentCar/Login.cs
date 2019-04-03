@@ -13,12 +13,12 @@ namespace RentCar
 {
     public partial class Login : Form
     {
-        SqlConnection conLogin = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
         public Login()
         {
             InitializeComponent();
             TxtCedulaLogin.PasswordChar = '*';
-            TxtCedulaLogin.MaxLength = 12;
+            TxtCedulaLogin.MaxLength = 11;
             
         }
        
@@ -79,10 +79,10 @@ namespace RentCar
             try
             {
 
-                
-                conLogin.Open();
+                SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                con.Open();
                 string sqlLogin = "Select IdEmpleado,CedulaEmpleado from Empleado where IdEmpleado like " + TxtIDLogin.Text + " and CedulaEmpleado like " + TxtCedulaLogin.Text + " ";
-                SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, conLogin);
+                SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, con);
                 DataTable dta = new DataTable();
                 sda.Fill(dta);
 
@@ -112,7 +112,7 @@ namespace RentCar
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Ha ocurrido un error en logmain :"+ex.Message);
             }
 
         }
@@ -120,9 +120,9 @@ namespace RentCar
         private void logadmin() {
 
             
-            conLogin.Open();
+            con.Open();
             string sqlLogin = "Select TipoEmpleado from Empleado where IdEmpleado like " + TxtIDLogin.Text + "and TipoEmpleado = " + "'Administrativo'" + " ";
-            SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, conLogin);
+            SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, con);
             DataTable dta = new DataTable();
             sda.Fill(dta);
 
@@ -147,9 +147,9 @@ namespace RentCar
         {
 
             
-            conLogin.Open();
+            con.Open();
             string sqlLogin = "Select TipoEmpleado from Empleado where IdEmpleado like " + TxtIDLogin.Text + "and TipoEmpleado = " + "'Ventas'" + " ";
-            SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, conLogin);
+            SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, con);
             DataTable dta = new DataTable();
             sda.Fill(dta);
 
@@ -186,6 +186,11 @@ namespace RentCar
         private void TxtIDLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
             Validar.SoloNumeros(e);
+        }
+
+        private void BtSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

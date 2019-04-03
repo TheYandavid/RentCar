@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarVe));
             this.panel1 = new System.Windows.Forms.Panel();
             this.BtSalir = new System.Windows.Forms.Button();
             this.cmbID = new System.Windows.Forms.ComboBox();
@@ -49,11 +50,13 @@
             this.TxtTipoVehiculo = new System.Windows.Forms.TextBox();
             this.TxtNuMotor = new System.Windows.Forms.TextBox();
             this.TxtNuChasis = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.BtSalir);
             this.panel1.Controls.Add(this.cmbID);
             this.panel1.Controls.Add(this.Bteditar);
@@ -259,6 +262,17 @@
             this.TxtNuChasis.Size = new System.Drawing.Size(273, 20);
             this.TxtNuChasis.TabIndex = 27;
             // 
+            // button1
+            // 
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Location = new System.Drawing.Point(580, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(38, 30);
+            this.button1.TabIndex = 47;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // EditarVe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,5 +312,6 @@
         private System.Windows.Forms.TextBox TxtNuMotor;
         private System.Windows.Forms.TextBox TxtNuChasis;
         private System.Windows.Forms.Button BtSalir;
+        private System.Windows.Forms.Button button1;
     }
 }

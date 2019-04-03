@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarInspeccion));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.DtpFechaInspeccion = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.cmbIDInsp = new System.Windows.Forms.ComboBox();
             this.CmbIdEmpleado = new System.Windows.Forms.ComboBox();
@@ -51,8 +53,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.DtpFechaInspeccion = new System.Windows.Forms.DateTimePicker();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -84,6 +88,13 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(537, 402);
             this.panel1.TabIndex = 1;
+            // 
+            // DtpFechaInspeccion
+            // 
+            this.DtpFechaInspeccion.Location = new System.Drawing.Point(193, 325);
+            this.DtpFechaInspeccion.Name = "DtpFechaInspeccion";
+            this.DtpFechaInspeccion.Size = new System.Drawing.Size(121, 20);
+            this.DtpFechaInspeccion.TabIndex = 32;
             // 
             // label11
             // 
@@ -305,24 +316,41 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "ID Vehiculo";
             // 
-            // DtpFechaInspeccion
+            // panel2
             // 
-            this.DtpFechaInspeccion.Location = new System.Drawing.Point(193, 325);
-            this.DtpFechaInspeccion.Name = "DtpFechaInspeccion";
-            this.DtpFechaInspeccion.Size = new System.Drawing.Size(121, 20);
-            this.DtpFechaInspeccion.TabIndex = 32;
+            this.panel2.Controls.Add(this.button1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(578, 30);
+            this.panel2.TabIndex = 2;
+            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Location = new System.Drawing.Point(537, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(38, 30);
+            this.button1.TabIndex = 8;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // EditarInspeccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(578, 450);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EditarInspeccion";
             this.Text = "EditarInspeccion";
             this.Load += new System.EventHandler(this.EditarInspeccion_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -353,5 +381,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cmbIDInsp;
         private System.Windows.Forms.DateTimePicker DtpFechaInspeccion;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button button1;
     }
 }

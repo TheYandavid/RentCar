@@ -11,8 +11,8 @@ namespace RentCar.Clases
 {
     class Conexion
     {
-       
-        static string connectionStr = ConfigurationManager.ConnectionStrings["RentCar.Properties.Settings.RentCarConnectionString"].ConnectionString;
+      /* 
+       // static string connectionStr = ConfigurationManager.ConnectionStrings["RentCar.Properties.Settings.RentCarConnectionString"].ConnectionString;
 
         
        public static SqlConnection getSqlConexion()
@@ -20,8 +20,9 @@ namespace RentCar.Clases
            
           
            
-            return new SqlConnection(connectionStr);
+        //    return new SqlConnection(connectionStr);
 
         }
+        */
     }
 }

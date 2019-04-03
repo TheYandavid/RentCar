@@ -13,6 +13,8 @@ using System.Runtime.InteropServices;
 
 namespace RentCar
 {
+
+    
     public partial class RegistrarEmpleado : Form
     {
 
@@ -24,6 +26,7 @@ namespace RentCar
         public RegistrarEmpleado()
         {
             InitializeComponent();
+            TxtCedula.MaxLength = 11;
         }
 
         private void RegistrarEmpleado_Load(object sender, EventArgs e)
@@ -38,12 +41,18 @@ namespace RentCar
 
         private void RegistrarEmpelado()
         {
+            if (TxtNombre.Text == "" | TxtCedula.Text == "" | cmbTanda.Text == "" | TxtPorcientoComision.Text == "" | cmbEstado.Text == "" | CmbTipoEmpleado.Text == "")
+            {
+                MessageBox.Show("Faltan campos por llenar", "Error");
+            }
+            else {
+            
             try
             {
 
-                
 
-                
+
+                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
                 con.Open();
                 string sql = "INSERT INTO Empleado (NombreEmpleado,CedulaEmpleado,TandaLabor,PorcientoComision,FechaIngreso,Estado,TipoEmpleado) VALUES (@nombre,@cedula,@TandaLaboral,@PorcientoComision,@FechaIngreso,@Estado,@TipoEmpleado) ";
                 SqlCommand comando = new SqlCommand(sql, con);
@@ -71,7 +80,7 @@ namespace RentCar
             }
 
 
-
+            }
 
 
         }
@@ -113,6 +122,90 @@ namespace RentCar
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
 
+        }
+
+        private void TxtCedula_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                con.Open();
+                string sqlLogin = "select CedulaEmpleado from Empleado  where CedulaEmpleado = " + TxtCedula.Text + " ";
+                SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, con);
+                DataTable dta = new DataTable();
+                sda.Fill(dta);
+
+
+                if (dta.Rows.Count == 1)
+                {
+                    MessageBox.Show("Esa cedula ya esta registrada, ingrese otra");
+                    TxtCedula.Text = "";
+
+
+
+
+
+                }
+                else
+                {
+                    try
+                    {
+                        string pCedula = TxtCedula.Text;
+
+                        int vnTotal = 0;
+                        string vcCedula = pCedula.Replace("-", "");
+                        int pLongCed = vcCedula.Trim().Length;
+                        int[] digitoMult = new int[11] { 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1 };
+
+                        if (pLongCed < 11 || pLongCed > 11)
+                            return;
+
+                        for (int vDig = 1; vDig <= pLongCed; vDig++)
+                        {
+                            int vCalculo = Int32.Parse(vcCedula.Substring(vDig - 1, 1)) * digitoMult[vDig - 1];
+                            if (vCalculo < 10)
+                                vnTotal += vCalculo;
+                            else
+                                vnTotal += Int32.Parse(vCalculo.ToString().Substring(0, 1)) + Int32.Parse(vCalculo.ToString().Substring(1, 1));
+                        }
+
+                        if (vnTotal % 10 == 0)
+                        {
+
+
+                        }
+
+                        else
+                        {
+
+                            MessageBox.Show("Cedula incoreccta");
+                            TxtCedula.Text = "";
+
+                        }
+                        return;
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show("ha ocurrido un error al validar la cedula:" + ex.Message);
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ha ocurrido un error al validar:" + ex.Message);
+            }
+           
+
+
+
+
+           
+
+           
         }
     }
 }
