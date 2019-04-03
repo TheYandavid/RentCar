@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using RentCar.Clases;
 
 namespace RentCar
 {
     public partial class EditarVehiculos : Form
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        //SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = Conexion.getSqlConexion();
+   
         public EditarVehiculos()
         {
             InitializeComponent();
@@ -23,9 +26,7 @@ namespace RentCar
         {
             // TODO: This line of code loads data into the 'rentCarDataSet1.Vehiculos' table. You can move, or remove it, as needed.
             this.vehiculosTableAdapter.Fill(this.rentCarDataSet1.Vehiculos);
-
             cargarTabla();
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,15 +38,10 @@ namespace RentCar
         {
             EditarVe frmeditar = new EditarVe();
             frmeditar.ShowDialog();
-
         }
     
-
         private void cargarTabla()
         {
-
-
-            
             con.Open();
             string sql = "select * from Vehiculos";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
@@ -53,22 +49,15 @@ namespace RentCar
             da.Fill(dt);
             DgvEditVehiculos.DataSource = dt;
             DgvEditVehiculos.Refresh();
-
-
-
         }
 
         private void Eliminar_Click(object sender, EventArgs e)
         {
-        
             try
             {
-                
-                
                 string sql = "DELETE FROM Vehiculos WHERE IdVehiculos = " + "'" + TxtId.Text + "'" + "";
                 SqlCommand comando = new SqlCommand(sql, con);
                 comando.ExecuteNonQuery();
-
 
                 MessageBox.Show("Registro Borrado");
                 DgvEditVehiculos.Refresh();
@@ -76,12 +65,8 @@ namespace RentCar
             }
             catch (Exception)
             {
-
                 MessageBox.Show("Ha ocurrido un error");
-
             }
-
-            
         }
 
         private void TxtId_KeyPress(object sender, KeyPressEventArgs e)

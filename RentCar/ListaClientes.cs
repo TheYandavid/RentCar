@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using RentCar.Clases;
 
 namespace RentCar
 {
     public partial class ListaClientes : Form
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        //SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = Conexion.getSqlConexion();
         public ListaClientes()
         {
             InitializeComponent();
@@ -21,25 +23,18 @@ namespace RentCar
 
         private void ListaClientes_Load(object sender, EventArgs e)
         {
-           
-
-
             cargarTabla();
-
         }
 
         private void BtEliminar_Click(object sender, EventArgs e)
         {
             try
             {
-
-               
-                con.Open();
+                if (con.State != ConnectionState.Open)
+                    con.Open();
                 string sql = "DELETE FROM Cliente WHERE IdCliente = " + "'" + TxtId.Text + "'" + "";
                 SqlCommand comando = new SqlCommand(sql, con);
                 comando.ExecuteNonQuery();
-
-
                 MessageBox.Show("Registro Borrado");
                 Dgvclientes.Refresh();
                 this.Close();
@@ -47,34 +42,25 @@ namespace RentCar
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
-
             }
-
-
-
         }
+
         private void cargarTabla()
         {
-
-
-            
-            con.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             string sql = "select * from Cliente";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
             DataTable dt = new DataTable();
             da.Fill(dt);
             Dgvclientes.DataSource = dt;
             Dgvclientes.Refresh();
-            
             con.Close();
-
         }
 
         private void BtActualizar_Click(object sender, EventArgs e)
         {
-
             Registro frmRegistro = new Registro();
             frmRegistro.BtRegistrar.Visible = false;
             frmRegistro.ShowDialog();

@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
+using RentCar.Clases;
 
 namespace RentCar
 {
     public partial class HistoRentas : Form
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        //SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = Conexion.getSqlConexion();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -28,69 +30,54 @@ namespace RentCar
         {
             // TODO: This line of code loads data into the 'rentCarDataSet1.Renta' table. You can move, or remove it, as needed.
             this.rentaTableAdapter1.Fill(this.rentCarDataSet1.Renta);
-
-
             // TODO: This line of code loads data into the 'rentCarDataSet.Renta' table. You can move, or remove it, as needed.
-
             //CargarTabla();
         }
 
         private void BtActualizar_Click(object sender, EventArgs e)
         {
             
-         }
+        }
+
         private void BtBorrar_Click(object sender, EventArgs e)
         {
             try
             {
-
-                
-                con.Open();
+                if (con.State != ConnectionState.Open)
+                    con.Open();
                 string sql = "Select * from Renta WHERE IdRenta = " + "'" + TxtIdRenta.Text + "'" + "";
                 SqlCommand comando = new SqlCommand(sql, con);
                 SqlDataAdapter da = new SqlDataAdapter(sql, con);
-                
                 DataTable dt = new DataTable();
-
                 da.Fill(dt);
                 DgvRenta.DataSource = dt;
                 DgvRenta.Refresh();
                 comando.ExecuteNonQuery();
-
                 con.Close();
             }
             catch (Exception)
             {
-
                 MessageBox.Show("Ha ocurrido un error");
-
             }
         }
         private void CargarTabla()
         {
             try
             {
-                
-                con.Open();
+                if (con.State != ConnectionState.Open)
+                    con.Open();
                 string sql = "select * from Renta";
                 SqlDataAdapter da = new SqlDataAdapter(sql, con);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 DgvRenta.DataSource = dt;
                 DgvRenta.Refresh();
-
                 con.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error" + ex);
-               
             }
-
-           
-
-
-
         }
 
         private void TxtIdRenta_KeyPress(object sender, KeyPressEventArgs e)

@@ -71,10 +71,6 @@ namespace RentCar
                 MessageBox.Show("No puedes introducir numero negativos");
             }
 
-
-
         }
-        
-
     }
-    }
+}

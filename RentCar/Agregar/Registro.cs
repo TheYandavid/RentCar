@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
+using RentCar.Clases;
 
 namespace RentCar
 {
     public partial class Registro : Form
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
-
+        //SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = Conexion.getSqlConexion();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -34,13 +35,8 @@ namespace RentCar
         {
             try
             {
-               
-                
-
-                
-
-               
-                con.Open();
+                if (con.State != ConnectionState.Open)
+                    con.Open();
                 string sql = "INSERT INTO Cliente (NombreCliente,CedulaCliente, DireccionCliente,NoTarjetaCR,LimiteCredito,TipoPersona) VALUES (@nombre,@cedula,@Direccion,@Targeta,@LimiteCredito,@TipoPersona) ";
                 SqlCommand comando = new SqlCommand(sql, con);
                 comando.Parameters.AddWithValue("@nombre", TxtNombre.Text);
@@ -51,13 +47,9 @@ namespace RentCar
               
                 if (Rbfisica.Checked)
                 {
-
-
                     try
                     {
-
                         comando.Parameters.AddWithValue("@TipoPersona", "Fisica");
-
                     }
                     catch (Exception)
                     {
@@ -65,20 +57,13 @@ namespace RentCar
                         Rbfisica.Focus();
                         return;
                     }
-
-                  
-
                 }
 
                 if (Rbjuridica.Checked)
                 {
-
-
                     try
                     {
-
                         comando.Parameters.AddWithValue("@TipoPersona", "Juridica");
-
                     }
                     catch (Exception)
                     {
@@ -86,27 +71,15 @@ namespace RentCar
                         Rbjuridica.Focus();
                         return;
                     }
-
-
-
                 }
                 comando.ExecuteNonQuery();
                 MessageBox.Show("Ha sido registrado");
-
                 this.Close();
-
-
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
-
-
-
-
-
         }
 
         private void TxtCedula_KeyPress(object sender, KeyPressEventArgs e)
@@ -130,22 +103,13 @@ namespace RentCar
         }
 
         private void cargarcombobox() {
-
-            
-            con.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             //creacion de tabla intermedia
-
             DataTable tbl1 = new DataTable();
-            
-
             string sql1 = "select IdCliente from Cliente";
-            
             SqlCommand cmd1 = new SqlCommand(sql1, con);
-            
             SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
-
-
-            
             cmd1.ExecuteNonQuery();
             da1.Fill(tbl1);
 
@@ -153,29 +117,19 @@ namespace RentCar
             cmbId.DisplayMember = "IdCliente";
             cmbId.ValueMember = "IdCliente";
             cmbId.DataSource = tbl1;
-
-           
-
-            
-
-
         }
-        private void cargarinfo() {
 
+        private void cargarinfo() {
             try
             {
-                
-                con.Open();
+                if (con.State != ConnectionState.Open)
+                    con.Open();
                 DataTable tbl2 = new DataTable();
                 string sql2 = "select NombreCliente,CedulaCliente,DireccionCliente,NoTarjetaCR,LimiteCredito,TipoPersona from Cliente where IdCliente like  @idCliente ";
                 SqlCommand cmd2 = new SqlCommand(sql2, con);
                 SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
-
-
                 cmd2.Parameters.AddWithValue("@idCliente", cmbId.SelectedValue);
                 cmd2.ExecuteNonQuery();
-               
-
 
                 //Llenado Combo Box Empleado
                 TxtNombre.Text = "NombreCliente"; 
@@ -183,45 +137,28 @@ namespace RentCar
                 TxtDireccion.Text = "DireccionCliente";
                 TxtTargetaNum.Text = "NoTarjetaCR";
                 TxtLimiteCredito.Text = "LimiteCredito";
-
-                
                 da2.Fill(tbl2);
-
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
-          
         }
+
         private void BtEditar_Click(object sender, EventArgs e)
         {
             try
             {
-
-
-
-
-
-               
-                con.Open();
-
+                if (con.State != ConnectionState.Open)
+                    con.Open();
                 string sql = "UPDATE Cliente SET NombreCliente = " + "'" + TxtNombre.Text+ "'" + ", CedulaCliente = " + "'" + TxtCedula.Text + "'" + ", DireccionCliente = " + "'" + TxtDireccion + "'" + ", NoTarjetaCR = " + "'" + TxtTargetaNum.Text + "'" + ", LimiteCredito = " + "'" + TxtLimiteCredito.Text + "'" + ",TipoPersona = " + "'" + "@TipoPersona" + "'" + "where IdInspeccion = " + "'" + cmbId.SelectedValue + "'" + " ";
-
                 SqlCommand comando = new SqlCommand(sql, con);
-
-               
 
                 if (Rbfisica.Checked)
                 {
-
-
                     try
                     {
-
                         comando.Parameters.AddWithValue("@TipoPersona", "Fisica");
-
                     }
                     catch (Exception)
                     {
@@ -229,20 +166,13 @@ namespace RentCar
                         Rbfisica.Focus();
                         return;
                     }
-
-
-
                 }
 
                 if (Rbjuridica.Checked)
                 {
-
-
                     try
                     {
-
                         comando.Parameters.AddWithValue("@TipoPersona", "Juridica");
-
                     }
                     catch (Exception)
                     {
@@ -250,27 +180,17 @@ namespace RentCar
                         Rbjuridica.Focus();
                         return;
                     }
-
-
-
                 }
+
                 comando.ExecuteNonQuery();
                 MessageBox.Show("Ha sido actualizado");
-
                 this.Close();
-
-
             }
+
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
-
-
-
-
-
         }
 
         private void Registro_Load(object sender, EventArgs e)

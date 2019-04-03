@@ -8,26 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using RentCar.Clases;
 
 namespace RentCar
 {
     public partial class Rentar : Form
     {
         private string fecha_inicio, Fecha_Fin;
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        //SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = Conexion.getSqlConexion();
 
         public Rentar()
         {
             InitializeComponent();
         }
+
         private void Rentar_Load(object sender, EventArgs e)
         {
             mostrarTabla();
             cargarCombobox();
-
-            
-
         }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -35,65 +36,53 @@ namespace RentCar
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
             RentarFormulario();
         }
 
         private void RentarFormulario()
         {
-            try
-            {
-                
-                con.Open();
+            try{
+                if (con.State != ConnectionState.Open)
+                    con.Open();
                 string sql = "INSERT INTO Renta (IdVehiculo,IdEmpleado,IdCliente,FechaRenta,DepositoRenta,MontoXdia,CantidadDias,Comentario,FechaDevolucion) VALUES (@IdVehiculo,@IdEmpleado,@IdCliente,@FechaRenta,@DepositoRenta,@MontoXdia,@CantidadDias,@Comentario,@FechaDevolucion)";
                 string sql2 = "UPDATE Vehiculos SET Disponibilidad  = 'Rentado' where IdVehiculos = "  +  "'" +CmbIdVehiculo.SelectedValue+ "'" + "";
                 SqlCommand comando = new SqlCommand(sql, con);
                 SqlCommand comando2 = new SqlCommand(sql2, con);
-
-                  comando.Parameters.AddWithValue("@IdVehiculo", CmbIdVehiculo.SelectedValue);
-                  comando.Parameters.AddWithValue("@IdEmpleado", CmbIdEmpleado.SelectedValue);
-                  comando.Parameters.AddWithValue("@IdCliente", CmbIdCliente.SelectedValue);
-
-                /* comando.Parameters.AddWithValue("@IdVehiculo", TxtNoVehiculo.Text);
+                comando.Parameters.AddWithValue("@IdVehiculo", CmbIdVehiculo.SelectedValue);
+                comando.Parameters.AddWithValue("@IdEmpleado", CmbIdEmpleado.SelectedValue);
+                comando.Parameters.AddWithValue("@IdCliente", CmbIdCliente.SelectedValue);
+                /*comando.Parameters.AddWithValue("@IdVehiculo", TxtNoVehiculo.Text);
                  comando.Parameters.AddWithValue("@IdEmpleado", TxtEmpleado.Text);
                  comando.Parameters.AddWithValue("@IdCliente", TxtCliente.Text);*/
-
                 comando.Parameters.AddWithValue("@FechaRenta", dateTimePicker1.Value.ToString("yyyy/M/d"));
                 comando.Parameters.AddWithValue("@DepositoRenta", TxtDeposito.Text);
                 comando.Parameters.AddWithValue("@MontoXdia", TxtMontoXdia.Text);
                 comando.Parameters.AddWithValue("@CantidadDias", TxtCantidadDias.Text);
                 comando.Parameters.AddWithValue("@Comentario", TxtComentarios.Text);
                 comando.Parameters.AddWithValue("@FechaDevolucion", dateTimePicker2.Value.ToString("yyyy/M/d"));
-
                 comando.ExecuteNonQuery();
                 comando2.ExecuteNonQuery();
 
-                if (dateTimePicker1.Value <= dateTimePicker2.Value)
-                {
-                    
+                if (dateTimePicker1.Value <= dateTimePicker2.Value){
                     comando.ExecuteNonQuery();
                     MessageBox.Show("La Renta se a registrado");
-                }
-                else
-                {
+                } else {
                     MessageBox.Show("Fecha de devolucion erronea.", "Error");
                     return;
                 }
                 this.Close();
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex){
                 MessageBox.Show(ex.Message);
             }
         }
 
         private void cargarCombobox()
         {
+            if (con.State != ConnectionState.Open)
+                con.Open();
 
-           
-            con.Open();
             //creacion de tabla intermedia
-
             DataTable tbl1 = new DataTable();
             DataTable tbl2 = new DataTable();
             DataTable tbl3 = new DataTable();
@@ -130,23 +119,15 @@ namespace RentCar
             CmbIdEmpleado.DataSource = tbl2;
 
             //Llenado Combo box cliente
-
             CmbIdCliente.DisplayMember = "NombreCliente";
             CmbIdCliente.ValueMember = "IdCliente";
             CmbIdCliente.DataSource = tbl3;
 
             //Llenado Combo box Marcas
-
             CmbMarca.DisplayMember = "ModeloVehiculos";
             CmbMarca.ValueMember = "IdVehiculos";
             CmbMarca.DataSource = tbl4;
-     
-
-
-
-
         }
-
 
         private void CmbIdVehiculo_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -157,8 +138,8 @@ namespace RentCar
         {
             try
             {
-                
-                con.Open();
+                if (con.State != ConnectionState.Open)
+                    con.Open();
                 string sql = "select * from Vehiculos";
                 sql += " where IdVehiculos LIKE '" + CmbMarca.SelectedValue + "%' ";
                 SqlDataAdapter da = new SqlDataAdapter(sql, con);
@@ -169,26 +150,20 @@ namespace RentCar
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show("Error al ejecutar la consulta: " + ex.Message);
-
             }
-
         }
 
         private void mostrarTabla()
         {
-
-            
-            con.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             string sql = "select * from Vehiculos";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
             DataTable dt = new DataTable();
             da.Fill(dt);
             dgvVehiculos.DataSource = dt;
             dgvVehiculos.Refresh();
-
-
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -203,7 +178,6 @@ namespace RentCar
             int rest = DateTime.Now.Date.Subtract(dateTimePicker2.Value.Date).Days;
             int resultado = dias - rest ;
             TxtCantidadDias.Text = resultado.ToString();
-
         }
 
         private void calcularfehca_Click(object sender, EventArgs e)
@@ -226,13 +200,11 @@ namespace RentCar
             Rentar frmRentar = new Rentar();
             frmRentar.BtRentar.Visible = true;
             valdiarDis();
-           
         }
 
         private void valdiarDis() {
-
-            
-            con.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             string sqlLogin = "Select Disponibilidad from Vehiculos where Disponibilidad = 'Disponible' and  IdVehiculos =" + "'"+ CmbIdVehiculo.SelectedValue + "'" + " ";
             SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, con);
             DataTable dta = new DataTable();
@@ -240,21 +212,12 @@ namespace RentCar
 
             if (dta.Rows.Count == 1 && BtRentar.Visible == false)
             {
-
-
                 Rentar frmRentar = new Rentar();
-
-
                 this.Hide();
                 frmRentar.BtRentar.Visible = true;
                 frmRentar.Show();
-                
                 MessageBox.Show("Encontrado");
-
-
             }
-
-
             else
             {
                 Rentar frmRentar = new Rentar();
@@ -263,13 +226,10 @@ namespace RentCar
                 frmRentar.Show();
                 MessageBox.Show("Ese vehiculo no esta disponible");
             }
-
-
         }
 
         private void CmbIdVehiculo_Click(object sender, EventArgs e)
         {
-           
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -277,7 +237,6 @@ namespace RentCar
             //fecha_inicio = dateTimePicker1.Value.Date.ToShortDateString();
             dateTimePicker1.MinDate = DateTime.Now;
             fecha_inicio = dateTimePicker1.Value.Date.ToShortDateString();
-
         }
     }
             

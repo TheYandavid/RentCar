@@ -8,27 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using RentCar.Clases;
 
 namespace RentCar
 {
     public partial class Login : Form
     {
-        SqlConnection conLogin = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        //SqlConnection conLogin = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection conLogin = Conexion.getSqlConexion();
+
         public Login()
         {
             InitializeComponent();
             TxtCedulaLogin.PasswordChar = '*';
             TxtCedulaLogin.MaxLength = 12;
-            
         }
-       
 
         private void BtIngresarLogin_Click(object sender, EventArgs e)
         {
             try
             {
                 string pCedula = TxtCedulaLogin.Text;
-
                 int vnTotal = 0;
                 string vcCedula = pCedula.Replace("-", "");
                 int pLongCed = vcCedula.Trim().Length;
@@ -46,129 +46,77 @@ namespace RentCar
                         vnTotal += Int32.Parse(vCalculo.ToString().Substring(0, 1)) + Int32.Parse(vCalculo.ToString().Substring(1, 1));
                 }
 
-                if (vnTotal % 10 == 0)
-                {
-
+                if (vnTotal % 10 == 0){
                     logmain();
-
-                }
-
-                else
-                {
-
+                } else {
                     MessageBox.Show("Cedula incoreccta");
                 }
                 return;
-
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show("ha ocurrido un error al validar la cedula:" + ex.Message);
-
             }
-            
-
-            
-           
-
         }
 
         private void logmain() {
-
             try
             {
-
-                
                 conLogin.Open();
                 string sqlLogin = "Select IdEmpleado,CedulaEmpleado from Empleado where IdEmpleado like " + TxtIDLogin.Text + " and CedulaEmpleado like " + TxtCedulaLogin.Text + " ";
                 SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, conLogin);
                 DataTable dta = new DataTable();
                 sda.Fill(dta);
 
-
-                if (dta.Rows.Count == 1)
-                {
+                if (dta.Rows.Count == 1){
                     MessageBox.Show("Login exitoso.");
-
                     logadmin();
-
-
-
-
-                }
-                else
-                {
+                } else {
                     MessageBox.Show("Datos incorrectos.");
                 }
-
-
-
-
-
-
-
             }
-            catch (Exception ex)
-            {
-
+            catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void logadmin() {
-
-            
-            conLogin.Open();
+            if (conLogin.State != ConnectionState.Open)
+                conLogin.Open();
+            //conLogin.Open();
             string sqlLogin = "Select TipoEmpleado from Empleado where IdEmpleado like " + TxtIDLogin.Text + "and TipoEmpleado = " + "'Administrativo'" + " ";
             SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, conLogin);
             DataTable dta = new DataTable();
             sda.Fill(dta);
 
-            if (dta.Rows.Count == 1)
-            {
+            if (dta.Rows.Count == 1) {
                 MessageBox.Show("Bienbenido Administrador.");
                 Menu frmMenu = new Menu();
                 frmMenu.ShowDialog();
                 this.Close();
-            }
-
-
-            else 
-            {
+            } else {
                 logventa();
             }
-
-
         }
 
         private void logventa()
         {
-
-            
-            conLogin.Open();
+            if (conLogin.State != ConnectionState.Open)
+                conLogin.Open();
+            //conLogin.Open();
             string sqlLogin = "Select TipoEmpleado from Empleado where IdEmpleado like " + TxtIDLogin.Text + "and TipoEmpleado = " + "'Ventas'" + " ";
             SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, conLogin);
             DataTable dta = new DataTable();
             sda.Fill(dta);
 
-            if (dta.Rows.Count == 1)
-            {
+            if (dta.Rows.Count == 1){
                 MessageBox.Show("Bienbenido Empleado de Ventas.");
                 UserVentas frmUserventas = new UserVentas();
                 frmUserventas.ShowDialog();
             }
-
-
-            else
-            {
-
+            else {
                 MessageBox.Show("Error al vereficar su tipo de usuario.");
-
             }
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -181,7 +129,6 @@ namespace RentCar
         {
            
         }
-        
 
         private void TxtIDLogin_KeyPress(object sender, KeyPressEventArgs e)
         {

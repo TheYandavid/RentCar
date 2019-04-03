@@ -22,32 +22,18 @@ namespace RentCar
         {
             try
             {
-             
                 //string pass = 1631;
-                if (Convert.ToInt32(TxtPassAdm.Text) == 1631)
-                {
+                if (Convert.ToInt32(TxtPassAdm.Text) == 1631){
                     RegistrarEmpleado frmRegisEmpleado = new RegistrarEmpleado();
-
                     frmRegisEmpleado.ShowDialog();
-
                     this.Close();
-                }
-
-                else
-                {
-
+                } else {
                     MessageBox.Show("contraseña de afministrador incorrecta");
-
                 }
-
-
-                
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ha ocurrido un error");
-               
             }
         }
 

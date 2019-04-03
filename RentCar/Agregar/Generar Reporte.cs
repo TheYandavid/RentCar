@@ -14,11 +14,13 @@ using System.Text;
 using System.Diagnostics;
 using System.Data.SqlClient;
 using RentCar.Clases;
+
 namespace RentCar.Agregar
 {
     public partial class Generar_Reporte : Form
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        //SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = Conexion.getSqlConexion();
         DataTable dt = new DataTable();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -52,8 +54,6 @@ namespace RentCar.Agregar
 
         private void BtGenerarReport_Click(object sender, EventArgs e)
         {
-            
-
             try
             {
                 Reporte.writeFileHeader("sep=,");
@@ -71,34 +71,23 @@ namespace RentCar.Agregar
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show("" + ex.Message);
             }
         }
 
         private void cargartabla() {
-
-            
-            con.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             string SQL = "select * from Renta ";
-            
-
             SqlDataAdapter oDa = new SqlDataAdapter(SQL, con);
-
             dt = new DataTable();
             oDa.Fill(dt);
             DtRenta.DataSource = dt;
-                
-
-
-
-
-
         }
+
         private void Generar_Reporte_Load(object sender, EventArgs e)
         {
             cargartabla();
-            
         }
 
         private void button1_Click(object sender, EventArgs e)

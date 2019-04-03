@@ -13,7 +13,6 @@ namespace RentCar
 {
     public partial class Menu : Form
     {
-       
         public Menu()
         {
             InitializeComponent();
@@ -32,9 +31,6 @@ namespace RentCar
 
         private void button2_Click(object sender, EventArgs e)
         {
-           
-
-
             
         }
 
@@ -50,7 +46,6 @@ namespace RentCar
             frmRegistro.LbId.Visible = false;
             frmRegistro.cmbId.Visible = false;
             frmRegistro.ShowDialog();
-
             //frmRentar.BtRentar.Visible = false;
         }
 
@@ -88,19 +83,13 @@ namespace RentCar
         {
             Inspeccion frmInspeccion = new Inspeccion();
             frmInspeccion.ShowDialog();
-            
         }
 
         private void rentarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Rentar frmRentar = new Rentar();
             frmRentar.BtRentar.Visible = false;
-     
             frmRentar.ShowDialog();
-
-        
-          
-         
         }
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)

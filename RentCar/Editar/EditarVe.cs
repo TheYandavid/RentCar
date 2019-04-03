@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
+using RentCar.Clases;
 
 namespace RentCar
 {
     public partial class EditarVe : Form
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        //SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = Conexion.getSqlConexion();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -29,8 +31,6 @@ namespace RentCar
             try
             {
                 //Cargar Marca
-
-                
                 con.Open();
                 //creacion de tabla intermedia
                 DataTable tbl1 = new DataTable();
@@ -39,9 +39,6 @@ namespace RentCar
                 SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
                 cmd1.Parameters.AddWithValue("@Select", cmbID.SelectedValue);
                 da1.Fill(tbl1);
-
-                
-                
 
                 //Llenado Combo box Vehiculos
                 CmbMarca.DisplayMember = "Marca_Nombre";
@@ -53,12 +50,6 @@ namespace RentCar
                 MessageBox.Show(ex.Message);
 
             }
-            
-
-
-
-
-
         }
 
         private void Bteditar_Click(object sender, EventArgs e)
@@ -71,14 +62,10 @@ namespace RentCar
                 }
                 else
                 {
-                   
                     con.Open();
                     string sql1 = "UPDATE Vehiculos SET MarcaVehiculos = " + "'" + CmbMarca.SelectedValue + "'" + ", ModeloVehiculos = " + "'" + CmbModelo.SelectedValue + "'" + ", TipoCombustible = " + "'" + CmbTipoCombustible.Text + "'" + ", TipoVehiculo = " + "'" +TxtTipoVehiculo.Text + "'" + ", NoChasis = " + "'" + TxtNuChasis.Text + "'" + ",NoMotor= " + "'" + TxtNuMotor.Text + "'" + "'" + ",NoPlaca = " + "'" + TxtPlaca.Text + "'" + ",DescripcionVehiculo = " + "'" + TxtDescVehiculo + "'" + "where IdInspeccion = " + "'" + cmbID + "'" + " ";
-               
                     SqlCommand comando1 = new SqlCommand(sql1, con);
-                
                     comando1.ExecuteNonQuery();
-
                     MessageBox.Show("Has editado el vehiculo");
                     con.Close();
                 }
@@ -86,26 +73,18 @@ namespace RentCar
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
         }
 
         private void CmbMarca_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            
             con.Open();
-
             DataTable tbl2 = new DataTable();
-
             string sql2 = ("select Modelo_Nombre from Modelo where Marca_Nombre like @Select ");
             SqlCommand cmd2 = new SqlCommand(sql2, con);
             SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
-
-
             cmd2.Parameters.AddWithValue("@Select", CmbMarca.SelectedValue);
             cmd2.ExecuteNonQuery();
-
-
             da2.Fill(tbl2);
 
             //Llenado Combo Box Empleado
@@ -119,7 +98,6 @@ namespace RentCar
             try
             {
                 // Cargado de Combo Box ID
-               
                 con.Open();
                 //creacion de tabla intermedia
                 DataTable tbl1 = new DataTable();
@@ -136,34 +114,19 @@ namespace RentCar
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
-
-           
         }
 
         private void cargarEdit()
         {
-            
             con.Open();
             //creacion de tabla intermedia
             DataTable tbl1 = new DataTable();
             string sql1 = "select IdVehiculos,MarcaVehiculos  from Vehiculos where IdVehiculos like" +cmbID+ "";
             SqlCommand cmd1 = new SqlCommand(sql1, con);
-
             cmd1.ExecuteNonQuery();
- 
-
             //Llenado Combo box Vehiculos
             TxtTipoVehiculo.Text = "IdVehiculos";
-  
-     
-
-
-
-
-
-
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

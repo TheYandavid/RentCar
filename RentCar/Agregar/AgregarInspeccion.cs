@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
+using RentCar.Clases;
 
 namespace RentCar
 {
     public partial class AgregarInspeccion : Form
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        //SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = Conexion.getSqlConexion();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -26,11 +28,9 @@ namespace RentCar
 
         private void AgregarInspeccion_Load(object sender, EventArgs e)
         {
-
-            
             con.Open();
+            
             //creacion de tabla intermedia
-
             DataTable tbl1 = new DataTable();
             DataTable tbl2 = new DataTable();
             DataTable tbl3 = new DataTable();
@@ -76,23 +76,14 @@ namespace RentCar
 
         private void CrearInspeccion()
         {
-
             try
             {
                 if (CmbIdVehiculo.Text == "" | CmbIdCliente.Text == "" | CmbRalladuras.Text == "" | CmbCombustible.Text == "" | CmbGomaRepuesto.Text == "" | CmbGato.Text == "" | CmbRoturaCristal.Text == "" | CmbEstadoGomas.Text == "" | DtpFechaInspeccion.Text == "" | CmbIdEmpleado.Text =="")
-                {
                     MessageBox.Show("Faltan campos por llenar", "Error");
-                }
-                else
-                {
-
-                }
                 
                 con.Open();
                 string sql = " INSERT INTO InspeccionV (IdVehiculo,IdCliente,Ralladuras,CantidadCombustible,GomaRespuesto,Gato,RoturaCristal,EstadoGomas,FechaInspeccion,IdEmpleado) VALUES (@IdVehiculo,@IdCliente, @Ralladuras,@CantidadCombustible,@GomaRespuesto,@Gato,@RoturaCristal,@EstadoGomas,@FechaInspeccion,@IdEmpleado) ";
                 SqlCommand comando = new SqlCommand(sql, con);
-
-              
                 comando.Parameters.AddWithValue("@IdVehiculo", CmbIdVehiculo.SelectedValue);
                 comando.Parameters.AddWithValue("@IdCliente", CmbIdCliente.SelectedValue);
                 comando.Parameters.AddWithValue("@Ralladuras", CmbRalladuras.Text);
@@ -104,27 +95,14 @@ namespace RentCar
                 comando.Parameters.AddWithValue("@FechaInspeccion", DtpFechaInspeccion.Value.ToString("yyyy/M/d"));
                 comando.Parameters.AddWithValue("@IdEmpleado", CmbIdEmpleado.SelectedValue);
                 comando.ExecuteNonQuery();
-
-                
                 MessageBox.Show("Ha sido registrada la inspeccion");
-
-                
                 con.Close();
             }
-
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
 
             }
-
-
-
-
-
-
-
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

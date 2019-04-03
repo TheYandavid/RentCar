@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
@@ -152,6 +153,9 @@
     </Compile>
     <Compile Include="Rentar.Designer.cs">
       <DependentUpon>Rentar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RentCarDataSet.cs">
+      <DependentUpon>RentCarDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="RentCarDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
