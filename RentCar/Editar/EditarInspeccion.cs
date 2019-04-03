@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Runtime.InteropServices;
 
 namespace RentCar
 {
@@ -15,6 +16,10 @@ namespace RentCar
     {
 
         SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.Dll", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hwnd, int wnsg, int wparm, int lparam);
         public EditarInspeccion()
         {
             InitializeComponent();
@@ -22,24 +27,30 @@ namespace RentCar
 
         private void BtRegistrar_Click(object sender, EventArgs e)
         {
-            try
+            if (CmbIdVehiculo.Text == "" | CmbIdCliente.Text == "" | CmbRalladuras.Text == "" | CmbCombustible.Text == "" | CmbGomaRepuesto.Text == "" | CmbGato.Text == "" | CmbRoturaCristal.Text == "" | CmbIdEmpleado.Text == "" | CmbEstadoGomas.Text == "" )
             {
-                
-                con.Open();
-                string sqlUpdate = "UPDATE InspeccionV  SET IdVehiculo = " + "'" + CmbIdVehiculo.SelectedValue + "'" + ", IdCliente = " + "'" + CmbIdCliente.SelectedValue + "'" + ", Ralladuras = " + "'" + CmbRalladuras.Text + "'" + ", CantidadCombustible = " + "'" + CmbCombustible.Text + "'" + ", GomaRespuesto = " + "'" + CmbGomaRepuesto.Text + "'" + ",Gato = " + "'" + CmbGato.Text + "'" + "'" + ",RoturaCristal = " + "'" + CmbRoturaCristal.Text + "'" + ",EstadoGomas = " + "'" + CmbEstadoGomas.Text + "'" + ",FechaInspeccion = " + "'" + DtpFechaInspeccion.Value.ToString("yyyy/M/d") + "'" + ",IdEmpleado = " + "'" + CmbIdEmpleado.Text + "where IdInspeccion = " + "'" + cmbIDInsp.SelectedValue + "'" + " ";
-                SqlCommand comando = new SqlCommand(sqlUpdate, con);
-                comando.ExecuteNonQuery();
-
-
-                MessageBox.Show("Registro Actualizado");
+                MessageBox.Show("Faltan campos por llenar", "Error");
             }
-            catch (Exception ex)
+            else
             {
+                try
+                {
 
-                MessageBox.Show("Ha ocurrido un error:"+ ex.Message);
+                    con.Open();
+                    string sqlUpdate = "UPDATE InspeccionV  SET IdVehiculo = " + "'" + CmbIdVehiculo.SelectedValue + "'" + ", IdCliente = " + "'" + CmbIdCliente.SelectedValue + "'" + ", Ralladuras = " + "'" + CmbRalladuras.Text + "'" + ", CantidadCombustible = " + "'" + CmbCombustible.Text + "'" + ", GomaRespuesto = " + "'" + CmbGomaRepuesto.Text + "'" + ",Gato = " + "'" + CmbGato.Text + "'" + "'" + ",RoturaCristal = " + "'" + CmbRoturaCristal.Text + "'" + ",EstadoGomas = " + "'" + CmbEstadoGomas.Text + "'" + ",FechaInspeccion = " + "'" + DtpFechaInspeccion.Value.ToString("yyyy/M/d") + "'" + ",IdEmpleado = " + "'" + CmbIdEmpleado.Text + "where IdInspeccion = " + "'" + cmbIDInsp.SelectedValue + "'" + " ";
+                    SqlCommand comando = new SqlCommand(sqlUpdate, con);
+                    comando.ExecuteNonQuery();
+
+
+                    MessageBox.Show("Registro Actualizado");
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Ha ocurrido un error:" + ex.Message);
+                }
+
             }
-           
-            
             con.Close();
         }
 
@@ -167,6 +178,17 @@ namespace RentCar
            
             //creacion de tabla intermedia
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void panel2_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }

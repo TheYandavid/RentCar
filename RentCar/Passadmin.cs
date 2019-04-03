@@ -16,6 +16,7 @@ namespace RentCar
         {
             InitializeComponent();
             TxtPassAdm.PasswordChar = '*';
+            TxtPassAdm.MaxLength = 4;
         }
 
         private void Btpass_Click(object sender, EventArgs e)
@@ -46,7 +47,7 @@ namespace RentCar
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ha ocurrido un error");
+                MessageBox.Show("Ha ocurrido un error"+ ex.Message);
                
             }
         }

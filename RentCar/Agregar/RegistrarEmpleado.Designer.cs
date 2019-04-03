@@ -66,6 +66,7 @@
             this.TxtCedula.Size = new System.Drawing.Size(161, 20);
             this.TxtCedula.TabIndex = 1;
             this.TxtCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtCedula_KeyPress);
+            this.TxtCedula.Validating += new System.ComponentModel.CancelEventHandler(this.TxtCedula_Validating);
             // 
             // TxtPorcientoComision
             // 

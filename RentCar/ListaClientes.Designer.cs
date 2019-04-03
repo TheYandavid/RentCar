@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListaClientes));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.TxtId = new System.Windows.Forms.TextBox();
@@ -39,6 +40,7 @@
             this.clienteBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.clienteBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.clienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.BtSalir = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dgvclientes)).BeginInit();
@@ -126,16 +128,30 @@
             // 
             this.clienteBindingSource.DataMember = "Cliente";
             // 
+            // BtSalir
+            // 
+            this.BtSalir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtSalir.BackgroundImage")));
+            this.BtSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtSalir.Location = new System.Drawing.Point(755, 1);
+            this.BtSalir.Name = "BtSalir";
+            this.BtSalir.Size = new System.Drawing.Size(42, 34);
+            this.BtSalir.TabIndex = 6;
+            this.BtSalir.UseVisualStyleBackColor = true;
+            this.BtSalir.Click += new System.EventHandler(this.BtSalir_Click);
+            // 
             // ListaClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 481);
+            this.Controls.Add(this.BtSalir);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ListaClientes";
             this.Text = "ListaClientes";
             this.Load += new System.EventHandler(this.ListaClientes_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListaClientes_MouseDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -186,5 +202,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView Dgvclientes;
+        private System.Windows.Forms.Button BtSalir;
     }
 }

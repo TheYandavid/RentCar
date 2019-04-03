@@ -44,12 +44,15 @@
             this.listaDeInspeccionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generarReporteDeRentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.BtSalir = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clientesToolStripMenuItem,
             this.clientesToolStripMenuItem1,
@@ -61,6 +64,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.menuStrip1_MouseDown);
             // 
             // clientesToolStripMenuItem
             // 
@@ -166,32 +170,45 @@
             // generarReporteDeRentasToolStripMenuItem
             // 
             this.generarReporteDeRentasToolStripMenuItem.Name = "generarReporteDeRentasToolStripMenuItem";
-            this.generarReporteDeRentasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generarReporteDeRentasToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.generarReporteDeRentasToolStripMenuItem.Text = "Generar reporte";
             this.generarReporteDeRentasToolStripMenuItem.Click += new System.EventHandler(this.generarReporteDeRentasToolStripMenuItem_Click);
             // 
-            // button1
+            // panel1
             // 
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(12, 27);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(788, 411);
-            this.button1.TabIndex = 1;
-            this.button1.UseVisualStyleBackColor = true;
+            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.BtSalir);
+            this.panel1.Location = new System.Drawing.Point(12, 39);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(776, 399);
+            this.panel1.TabIndex = 1;
+            // 
+            // BtSalir
+            // 
+            this.BtSalir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtSalir.BackgroundImage")));
+            this.BtSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtSalir.Location = new System.Drawing.Point(731, 3);
+            this.BtSalir.Name = "BtSalir";
+            this.BtSalir.Size = new System.Drawing.Size(42, 34);
+            this.BtSalir.TabIndex = 7;
+            this.BtSalir.UseVisualStyleBackColor = true;
+            this.BtSalir.Click += new System.EventHandler(this.BtSalir_Click);
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Menu";
             this.Text = "Menu";
             this.Load += new System.EventHandler(this.Menu_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,9 +228,10 @@
         private System.Windows.Forms.ToolStripMenuItem eliminarVehiculoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inspeccionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listaDeInspeccionToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem rentarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generarReporteDeRentasToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button BtSalir;
     }
 }

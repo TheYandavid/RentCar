@@ -32,79 +32,86 @@ namespace RentCar
 
         private void Registrar()
         {
-            try
+            if (TxtNombre.Text == "" | TxtCedula.Text == "" | TxtDireccion.Text == "" | TxtTargetaNum.Text == "" | TxtLimiteCredito.Text == "")
             {
-               
-                
+                MessageBox.Show("Faltan campos por llenar", "Error");
+            }
+            else
+            {
 
-                
-
-               
-                con.Open();
-                string sql = "INSERT INTO Cliente (NombreCliente,CedulaCliente, DireccionCliente,NoTarjetaCR,LimiteCredito,TipoPersona) VALUES (@nombre,@cedula,@Direccion,@Targeta,@LimiteCredito,@TipoPersona) ";
-                SqlCommand comando = new SqlCommand(sql, con);
-                comando.Parameters.AddWithValue("@nombre", TxtNombre.Text);
-                comando.Parameters.AddWithValue("@cedula", TxtCedula.Text);
-                comando.Parameters.AddWithValue("@Direccion", TxtDireccion.Text);
-                comando.Parameters.AddWithValue("@Targeta", TxtTargetaNum.Text);
-                comando.Parameters.AddWithValue("@LimiteCredito", TxtLimiteCredito.Text);
-              
-                if (Rbfisica.Checked)
+                try
                 {
 
 
-                    try
+
+
+
+
+                    con.Open();
+                    string sql = "INSERT INTO Cliente (NombreCliente,CedulaCliente, DireccionCliente,NoTarjetaCR,LimiteCredito,TipoPersona) VALUES (@nombre,@cedula,@Direccion,@Targeta,@LimiteCredito,@TipoPersona) ";
+                    SqlCommand comando = new SqlCommand(sql, con);
+                    comando.Parameters.AddWithValue("@nombre", TxtNombre.Text);
+                    comando.Parameters.AddWithValue("@cedula", TxtCedula.Text);
+                    comando.Parameters.AddWithValue("@Direccion", TxtDireccion.Text);
+                    comando.Parameters.AddWithValue("@Targeta", TxtTargetaNum.Text);
+                    comando.Parameters.AddWithValue("@LimiteCredito", TxtLimiteCredito.Text);
+
+                    if (Rbfisica.Checked)
                     {
 
-                        comando.Parameters.AddWithValue("@TipoPersona", "Fisica");
+
+                        try
+                        {
+
+                            comando.Parameters.AddWithValue("@TipoPersona", "Fisica");
+
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Error al seleccionar tipo Persona");
+                            Rbfisica.Focus();
+                            return;
+                        }
+
+
 
                     }
-                    catch (Exception)
+
+                    if (Rbjuridica.Checked)
                     {
-                        MessageBox.Show("Error al seleccionar tipo Persona");
-                        Rbfisica.Focus();
-                        return;
-                    }
 
-                  
+
+                        try
+                        {
+
+                            comando.Parameters.AddWithValue("@TipoPersona", "Juridica");
+
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Error al seleccionar tipo Persona");
+                            Rbjuridica.Focus();
+                            return;
+                        }
+
+
+
+                    }
+                    comando.ExecuteNonQuery();
+                    MessageBox.Show("Ha sido registrado");
+
+                    this.Close();
+
 
                 }
-
-                if (Rbjuridica.Checked)
+                catch (Exception ex)
                 {
 
-
-                    try
-                    {
-
-                        comando.Parameters.AddWithValue("@TipoPersona", "Juridica");
-
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Error al seleccionar tipo Persona");
-                        Rbjuridica.Focus();
-                        return;
-                    }
-
-
-
+                    MessageBox.Show(ex.Message);
                 }
-                comando.ExecuteNonQuery();
-                MessageBox.Show("Ha sido registrado");
-
-                this.Close();
 
 
             }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message);
-            }
-
-
-
 
 
         }
@@ -197,78 +204,85 @@ namespace RentCar
         }
         private void BtEditar_Click(object sender, EventArgs e)
         {
-            try
+
+            if (TxtNombre.Text == "" | TxtCedula.Text == "" | TxtDireccion.Text == "" | TxtTargetaNum.Text == "" | TxtLimiteCredito.Text == "")
             {
-
-
-
-
-
-               
-                con.Open();
-
-                string sql = "UPDATE Cliente SET NombreCliente = " + "'" + TxtNombre.Text+ "'" + ", CedulaCliente = " + "'" + TxtCedula.Text + "'" + ", DireccionCliente = " + "'" + TxtDireccion + "'" + ", NoTarjetaCR = " + "'" + TxtTargetaNum.Text + "'" + ", LimiteCredito = " + "'" + TxtLimiteCredito.Text + "'" + ",TipoPersona = " + "'" + "@TipoPersona" + "'" + "where IdInspeccion = " + "'" + cmbId.SelectedValue + "'" + " ";
-
-                SqlCommand comando = new SqlCommand(sql, con);
-
-               
-
-                if (Rbfisica.Checked)
+                MessageBox.Show("Faltan campos por llenar", "Error");
+            }
+            else
+            {
+                try
                 {
 
 
-                    try
+
+
+
+
+                    con.Open();
+
+                    string sql = "UPDATE Cliente SET NombreCliente = " + "'" + TxtNombre.Text + "'" + ", CedulaCliente = " + "'" + TxtCedula.Text + "'" + ", DireccionCliente = " + "'" + TxtDireccion + "'" + ", NoTarjetaCR = " + "'" + TxtTargetaNum.Text + "'" + ", LimiteCredito = " + "'" + TxtLimiteCredito.Text + "'" + ",TipoPersona = " + "'" + "@TipoPersona" + "'" + "where IdInspeccion = " + "'" + cmbId.SelectedValue + "'" + " ";
+
+                    SqlCommand comando = new SqlCommand(sql, con);
+
+
+
+                    if (Rbfisica.Checked)
                     {
 
-                        comando.Parameters.AddWithValue("@TipoPersona", "Fisica");
+
+                        try
+                        {
+
+                            comando.Parameters.AddWithValue("@TipoPersona", "Fisica");
+
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Error al seleccionar tipo Persona");
+                            Rbfisica.Focus();
+                            return;
+                        }
+
+
 
                     }
-                    catch (Exception)
+
+                    if (Rbjuridica.Checked)
                     {
-                        MessageBox.Show("Error al seleccionar tipo Persona");
-                        Rbfisica.Focus();
-                        return;
-                    }
 
+
+                        try
+                        {
+
+                            comando.Parameters.AddWithValue("@TipoPersona", "Juridica");
+
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Error al seleccionar tipo Persona");
+                            Rbjuridica.Focus();
+                            return;
+                        }
+
+
+
+                    }
+                    comando.ExecuteNonQuery();
+                    MessageBox.Show("Ha sido actualizado");
+
+                    this.Close();
 
 
                 }
-
-                if (Rbjuridica.Checked)
+                catch (Exception ex)
                 {
 
-
-                    try
-                    {
-
-                        comando.Parameters.AddWithValue("@TipoPersona", "Juridica");
-
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Error al seleccionar tipo Persona");
-                        Rbjuridica.Focus();
-                        return;
-                    }
-
-
-
+                    MessageBox.Show(ex.Message);
                 }
-                comando.ExecuteNonQuery();
-                MessageBox.Show("Ha sido actualizado");
-
-                this.Close();
 
 
             }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message);
-            }
-
-
-
 
 
         }

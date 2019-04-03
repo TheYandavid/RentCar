@@ -335,9 +335,11 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Rentar";
             this.Text = "Rentar";
             this.Load += new System.EventHandler(this.Rentar_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Rentar_MouseDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

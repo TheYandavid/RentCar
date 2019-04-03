@@ -8,12 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Runtime.InteropServices;
 
 namespace RentCar
 {
     public partial class Menu : Form
     {
-       
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.Dll", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hwnd, int wnsg, int wparm, int lparam);
         public Menu()
         {
             InitializeComponent();
@@ -117,6 +121,17 @@ namespace RentCar
         {
             Agregar.Generar_Reporte frmReporte = new Agregar.Generar_Reporte();
             frmReporte.ShowDialog();
+        }
+
+        private void BtSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void menuStrip1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }
