@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inspeccion));
             this.panel1 = new System.Windows.Forms.Panel();
             this.BtAgregar = new System.Windows.Forms.Button();
             this.BtBorrar = new System.Windows.Forms.Button();
@@ -40,11 +41,14 @@
             this.inspeccionVBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rentCarDataSet = new RentCar.RentCarDataSet();
             this.inspeccionVTableAdapter = new RentCar.RentCarDataSetTableAdapters.InspeccionVTableAdapter();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.BtSalir = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvInspeccion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inspeccionVBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rentCarDataSet)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -140,13 +144,36 @@
             // 
             this.inspeccionVTableAdapter.ClearBeforeFill = true;
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.BtSalir);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1075, 34);
+            this.panel3.TabIndex = 2;
+            this.panel3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel3_MouseDown);
+            // 
+            // BtSalir
+            // 
+            this.BtSalir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtSalir.BackgroundImage")));
+            this.BtSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtSalir.Location = new System.Drawing.Point(1030, 0);
+            this.BtSalir.Name = "BtSalir";
+            this.BtSalir.Size = new System.Drawing.Size(42, 34);
+            this.BtSalir.TabIndex = 5;
+            this.BtSalir.UseVisualStyleBackColor = true;
+            this.BtSalir.Click += new System.EventHandler(this.BtSalir_Click);
+            // 
             // Inspeccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1075, 434);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Inspeccion";
             this.Text = "Inspeccion";
             this.Load += new System.EventHandler(this.Inspeccion_Load);
@@ -156,6 +183,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DgvInspeccion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inspeccionVBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rentCarDataSet)).EndInit();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -174,5 +202,7 @@
         private System.Windows.Forms.DataGridViewImageColumn roturaCristalDataGridViewImageColumn;
         private System.Windows.Forms.Button BtAgregar;
         private System.Windows.Forms.DataGridView DgvInspeccion;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button BtSalir;
     }
 }

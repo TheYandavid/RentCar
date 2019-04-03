@@ -30,11 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Generar_Reporte));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BtReporteRenta = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.BtGenerarReport = new System.Windows.Forms.Button();
             this.DtRenta = new System.Windows.Forms.DataGridView();
-            this.BtSalir = new System.Windows.Forms.Button();
+            this.BtGenerarReport = new System.Windows.Forms.Button();
+            this.BtReporteRenta = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DtRenta)).BeginInit();
@@ -43,7 +43,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.panel1.Controls.Add(this.BtSalir);
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.BtReporteRenta);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -52,20 +52,6 @@
             this.panel1.Size = new System.Drawing.Size(163, 370);
             this.panel1.TabIndex = 0;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
-            // 
-            // BtReporteRenta
-            // 
-            this.BtReporteRenta.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
-            this.BtReporteRenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtReporteRenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtReporteRenta.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.BtReporteRenta.Location = new System.Drawing.Point(12, 141);
-            this.BtReporteRenta.Name = "BtReporteRenta";
-            this.BtReporteRenta.Size = new System.Drawing.Size(128, 74);
-            this.BtReporteRenta.TabIndex = 0;
-            this.BtReporteRenta.Text = "Reporte de Rentas";
-            this.BtReporteRenta.UseVisualStyleBackColor = true;
-            this.BtReporteRenta.Click += new System.EventHandler(this.BtReporteRenta_Click);
             // 
             // panel2
             // 
@@ -76,6 +62,17 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(560, 370);
             this.panel2.TabIndex = 3;
+            // 
+            // DtRenta
+            // 
+            this.DtRenta.AllowUserToAddRows = false;
+            this.DtRenta.AllowUserToDeleteRows = false;
+            this.DtRenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DtRenta.Location = new System.Drawing.Point(25, 119);
+            this.DtRenta.Name = "DtRenta";
+            this.DtRenta.ReadOnly = true;
+            this.DtRenta.Size = new System.Drawing.Size(639, 150);
+            this.DtRenta.TabIndex = 2;
             // 
             // BtGenerarReport
             // 
@@ -91,26 +88,30 @@
             this.BtGenerarReport.UseVisualStyleBackColor = true;
             this.BtGenerarReport.Click += new System.EventHandler(this.BtGenerarReport_Click);
             // 
-            // DtRenta
+            // BtReporteRenta
             // 
-            this.DtRenta.AllowUserToAddRows = false;
-            this.DtRenta.AllowUserToDeleteRows = false;
-            this.DtRenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DtRenta.Location = new System.Drawing.Point(25, 119);
-            this.DtRenta.Name = "DtRenta";
-            this.DtRenta.ReadOnly = true;
-            this.DtRenta.Size = new System.Drawing.Size(639, 150);
-            this.DtRenta.TabIndex = 2;
+            this.BtReporteRenta.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.BtReporteRenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtReporteRenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtReporteRenta.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtReporteRenta.Location = new System.Drawing.Point(12, 141);
+            this.BtReporteRenta.Name = "BtReporteRenta";
+            this.BtReporteRenta.Size = new System.Drawing.Size(128, 74);
+            this.BtReporteRenta.TabIndex = 0;
+            this.BtReporteRenta.Text = "Reporte de Rentas";
+            this.BtReporteRenta.UseVisualStyleBackColor = true;
+            this.BtReporteRenta.Click += new System.EventHandler(this.BtReporteRenta_Click);
             // 
-            // BtSalir
+            // button1
             // 
-            this.BtSalir.Location = new System.Drawing.Point(48, 335);
-            this.BtSalir.Name = "BtSalir";
-            this.BtSalir.Size = new System.Drawing.Size(64, 23);
-            this.BtSalir.TabIndex = 1;
-            this.BtSalir.Text = "Salir";
-            this.BtSalir.UseVisualStyleBackColor = true;
-            this.BtSalir.Click += new System.EventHandler(this.BtSalir_Click);
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Location = new System.Drawing.Point(57, 316);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(42, 33);
+            this.button1.TabIndex = 5;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Generar_Reporte
             // 
@@ -140,6 +141,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView DtRenta;
         private System.Windows.Forms.Button BtGenerarReport;
-        private System.Windows.Forms.Button BtSalir;
+        private System.Windows.Forms.Button button1;
     }
 }

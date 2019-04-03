@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistrarEmpleado));
             this.TxtNombre = new System.Windows.Forms.TextBox();
             this.TxtCedula = new System.Windows.Forms.TextBox();
             this.TxtPorcientoComision = new System.Windows.Forms.TextBox();
@@ -44,7 +45,10 @@
             this.CmbTipoEmpleado = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.BtRegistrar = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // TxtNombre
@@ -211,17 +215,41 @@
             this.BtRegistrar.UseVisualStyleBackColor = true;
             this.BtRegistrar.Click += new System.EventHandler(this.BtRegistrar_Click);
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.button1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(393, 25);
+            this.panel2.TabIndex = 14;
+            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Location = new System.Drawing.Point(363, -1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(30, 26);
+            this.button1.TabIndex = 6;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // RegistrarEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(393, 415);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "RegistrarEmpleado";
             this.Text = "RegistrarEmpleado";
             this.Load += new System.EventHandler(this.RegistrarEmpleado_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -244,5 +272,7 @@
         private System.Windows.Forms.ComboBox cmbEstado;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         public System.Windows.Forms.Button BtRegistrar;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button button1;
     }
 }
