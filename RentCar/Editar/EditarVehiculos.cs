@@ -14,7 +14,7 @@ namespace RentCar
 {
     public partial class EditarVehiculos : Form
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = null; 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -50,7 +50,7 @@ namespace RentCar
         {
 
 
-            
+            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
             con.Open();
             string sql = "select * from Vehiculos";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
@@ -68,8 +68,8 @@ namespace RentCar
         
             try
             {
-                
-                
+                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                con.Open();
                 string sql = "DELETE FROM Vehiculos WHERE IdVehiculos = " + "'" + TxtId.Text + "'" + "";
                 SqlCommand comando = new SqlCommand(sql, con);
                 comando.ExecuteNonQuery();

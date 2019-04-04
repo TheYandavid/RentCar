@@ -8,12 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Runtime.InteropServices;
 
 namespace RentCar
 {
     public partial class Login : Form
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = null;
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.Dll", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hwnd, int wnsg, int wparm, int lparam);
+
         public Login()
         {
             InitializeComponent();
@@ -25,6 +31,7 @@ namespace RentCar
 
         private void BtIngresarLogin_Click(object sender, EventArgs e)
         {
+            
             try
             {
                 string pCedula = TxtCedulaLogin.Text;
@@ -79,7 +86,7 @@ namespace RentCar
             try
             {
 
-                SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
                 con.Open();
                 string sqlLogin = "Select IdEmpleado,CedulaEmpleado from Empleado where IdEmpleado like " + TxtIDLogin.Text + " and CedulaEmpleado like " + TxtCedulaLogin.Text + " ";
                 SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, con);
@@ -119,7 +126,7 @@ namespace RentCar
 
         private void logadmin() {
 
-            
+            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
             con.Open();
             string sqlLogin = "Select TipoEmpleado from Empleado where IdEmpleado like " + TxtIDLogin.Text + "and TipoEmpleado = " + "'Administrativo'" + " ";
             SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, con);
@@ -146,7 +153,7 @@ namespace RentCar
         private void logventa()
         {
 
-            
+            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
             con.Open();
             string sqlLogin = "Select TipoEmpleado from Empleado where IdEmpleado like " + TxtIDLogin.Text + "and TipoEmpleado = " + "'Ventas'" + " ";
             SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, con);
@@ -175,6 +182,9 @@ namespace RentCar
         {
             Passadmin frmPass = new Passadmin();
             frmPass.ShowDialog();
+            
+
+            
         }
 
         private void TxtIDLogin_TextChanged(object sender, EventArgs e)
@@ -191,6 +201,12 @@ namespace RentCar
         private void BtSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Login_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }

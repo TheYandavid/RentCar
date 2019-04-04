@@ -14,8 +14,10 @@ namespace RentCar
 {
     public partial class Rentar : Form
     {
+
+    
         private string fecha_inicio, Fecha_Fin;
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = null;
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -46,56 +48,60 @@ namespace RentCar
 
         private void RentarFormulario()
         {
-            try
+            if (TxtCantidadDias.Text == "" | TxtDeposito.Text == "" | TxtComentarios.Text == "" )
             {
-                
-                con.Open();
-                string sql = "INSERT INTO Renta (IdVehiculo,IdEmpleado,IdCliente,FechaRenta,DepositoRenta,MontoXdia,CantidadDias,Comentario,FechaDevolucion) VALUES (@IdVehiculo,@IdEmpleado,@IdCliente,@FechaRenta,@DepositoRenta,@MontoXdia,@CantidadDias,@Comentario,@FechaDevolucion)";
-                string sql2 = "UPDATE Vehiculos SET Disponibilidad  = 'Rentado' where IdVehiculos = "  +  "'" +CmbIdVehiculo.SelectedValue+ "'" + "";
-                SqlCommand comando = new SqlCommand(sql, con);
-                SqlCommand comando2 = new SqlCommand(sql2, con);
-
-                  comando.Parameters.AddWithValue("@IdVehiculo", CmbIdVehiculo.SelectedValue);
-                  comando.Parameters.AddWithValue("@IdEmpleado", CmbIdEmpleado.SelectedValue);
-                  comando.Parameters.AddWithValue("@IdCliente", CmbIdCliente.SelectedValue);
-
-                /* comando.Parameters.AddWithValue("@IdVehiculo", TxtNoVehiculo.Text);
-                 comando.Parameters.AddWithValue("@IdEmpleado", TxtEmpleado.Text);
-                 comando.Parameters.AddWithValue("@IdCliente", TxtCliente.Text);*/
-
-                comando.Parameters.AddWithValue("@FechaRenta", dateTimePicker1.Value.ToString("yyyy/M/d"));
-                comando.Parameters.AddWithValue("@DepositoRenta", TxtDeposito.Text);
-                comando.Parameters.AddWithValue("@MontoXdia", TxtMontoXdia.Text);
-                comando.Parameters.AddWithValue("@CantidadDias", TxtCantidadDias.Text);
-                comando.Parameters.AddWithValue("@Comentario", TxtComentarios.Text);
-                comando.Parameters.AddWithValue("@FechaDevolucion", dateTimePicker2.Value.ToString("yyyy/M/d"));
-
-                comando.ExecuteNonQuery();
-                comando2.ExecuteNonQuery();
-
-                if (dateTimePicker1.Value <= dateTimePicker2.Value)
-                {
-                    
-                    comando.ExecuteNonQuery();
-                    MessageBox.Show("La Renta se a registrado");
-                }
-                else
-                {
-                    MessageBox.Show("Fecha de devolucion erronea.", "Error");
-                    return;
-                }
-                this.Close();
+                MessageBox.Show("Faltan campos por llenar", "Error");
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                try
+                {
+                    con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                    con.Open();
+                    string sql = "INSERT INTO Renta (IdVehiculo,IdEmpleado,IdCliente,FechaRenta,DepositoRenta,MontoXdia,CantidadDias,Comentario,FechaDevolucion) VALUES (@IdVehiculo,@IdEmpleado,@IdCliente,@FechaRenta,@DepositoRenta,@MontoXdia,@CantidadDias,@Comentario,@FechaDevolucion)";
+                    string sql2 = "UPDATE Vehiculos SET Disponibilidad  = 'Rentado' where IdVehiculos = " + "'" + CmbIdVehiculo.Text + "'" + "";
+                    SqlCommand comando = new SqlCommand(sql, con);
+                    SqlCommand comando2 = new SqlCommand(sql2, con);
+
+                    comando.Parameters.AddWithValue("@IdVehiculo", CmbIdVehiculo.SelectedValue);
+                    comando.Parameters.AddWithValue("@IdEmpleado", CmbIdEmpleado.SelectedValue);
+                    comando.Parameters.AddWithValue("@IdCliente", CmbIdCliente.SelectedValue);
+
+
+                    comando.Parameters.AddWithValue("@FechaRenta", dateTimePicker1.Value.ToString("yyyy/M/d"));
+                    comando.Parameters.AddWithValue("@DepositoRenta", TxtDeposito.Text);
+                    comando.Parameters.AddWithValue("@MontoXdia", TxtMontoXdia.Text);
+                    comando.Parameters.AddWithValue("@CantidadDias", TxtCantidadDias.Text);
+                    comando.Parameters.AddWithValue("@Comentario", TxtComentarios.Text);
+                    comando.Parameters.AddWithValue("@FechaDevolucion", dateTimePicker2.Value.ToString("yyyy/M/d"));
+
+                    comando.ExecuteNonQuery();
+                    comando2.ExecuteNonQuery();
+
+                    if (dateTimePicker1.Value <= dateTimePicker2.Value)
+                    {
+
+                        comando.ExecuteNonQuery();
+                        MessageBox.Show("La Renta se a registrado");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Fecha de devolucion erronea.", "Error");
+                        return;
+                    }
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
         private void cargarCombobox()
         {
 
-           
+            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
             con.Open();
             //creacion de tabla intermedia
 
@@ -162,7 +168,7 @@ namespace RentCar
         {
             try
             {
-                
+                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
                 con.Open();
                 string sql = "select * from Vehiculos";
                 sql += " where IdVehiculos LIKE '" + CmbMarca.SelectedValue + "%' ";
@@ -184,7 +190,7 @@ namespace RentCar
         private void mostrarTabla()
         {
 
-            
+            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
             con.Open();
             string sql = "select * from Vehiculos";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
@@ -228,33 +234,32 @@ namespace RentCar
 
         private void CmbIdVehiculo_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            Rentar frmRentar = new Rentar();
-            frmRentar.BtRentar.Visible = true;
+            
+            
             valdiarDis();
            
         }
 
         private void valdiarDis() {
 
-            
+            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
             con.Open();
-            string sqlLogin = "Select Disponibilidad from Vehiculos where Disponibilidad = 'Disponible' and  IdVehiculos =" + "'"+ CmbIdVehiculo.SelectedValue + "'" + " ";
+            string sqlLogin = "Select Disponibilidad from Vehiculos where Disponibilidad = 'Disponible' and  IdVehiculos =" + "'" + CmbIdVehiculo.SelectedValue + "'" + " ";
             SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, con);
             DataTable dta = new DataTable();
             sda.Fill(dta);
 
-            if (dta.Rows.Count == 1 && BtRentar.Visible == false)
+            if (dta.Rows.Count == 1)
             {
 
 
                 Rentar frmRentar = new Rentar();
 
 
-                this.Hide();
-                frmRentar.BtRentar.Visible = true;
-                frmRentar.Show();
-                
-                MessageBox.Show("Encontrado");
+
+                frmRentar.BtRentar.Enabled = true;
+               
+                MessageBox.Show("Disponible");
 
 
             }
@@ -263,9 +268,9 @@ namespace RentCar
             else
             {
                 Rentar frmRentar = new Rentar();
-                this.Hide();
-                frmRentar.BtRentar.Visible = false;
-                frmRentar.Show();
+               
+                
+                
                 MessageBox.Show("Ese vehiculo no esta disponible");
             }
 
@@ -281,6 +286,11 @@ namespace RentCar
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void BtSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)

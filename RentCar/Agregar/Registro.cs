@@ -14,7 +14,7 @@ namespace RentCar
 {
     public partial class Registro : Form
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = null;
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -46,7 +46,7 @@ namespace RentCar
 
 
 
-
+                    con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
                     con.Open();
                     string sql = "INSERT INTO Cliente (NombreCliente,CedulaCliente, DireccionCliente,NoTarjetaCR,LimiteCredito,TipoPersona) VALUES (@nombre,@cedula,@Direccion,@Targeta,@LimiteCredito,@TipoPersona) ";
                     SqlCommand comando = new SqlCommand(sql, con);
@@ -138,7 +138,7 @@ namespace RentCar
 
         private void cargarcombobox() {
 
-            
+            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
             con.Open();
             //creacion de tabla intermedia
 
@@ -171,7 +171,7 @@ namespace RentCar
 
             try
             {
-                
+                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
                 con.Open();
                 DataTable tbl2 = new DataTable();
                 string sql2 = "select NombreCliente,CedulaCliente,DireccionCliente,NoTarjetaCR,LimiteCredito,TipoPersona from Cliente where IdCliente like  @idCliente ";
@@ -218,7 +218,7 @@ namespace RentCar
 
 
 
-
+                    con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
                     con.Open();
 
                     string sql = "UPDATE Cliente SET NombreCliente = " + "'" + TxtNombre.Text + "'" + ", CedulaCliente = " + "'" + TxtCedula.Text + "'" + ", DireccionCliente = " + "'" + TxtDireccion + "'" + ", NoTarjetaCR = " + "'" + TxtTargetaNum.Text + "'" + ", LimiteCredito = " + "'" + TxtLimiteCredito.Text + "'" + ",TipoPersona = " + "'" + "@TipoPersona" + "'" + "where IdInspeccion = " + "'" + cmbId.SelectedValue + "'" + " ";
