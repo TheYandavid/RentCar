@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
-
+using RentCar.Clases;
 namespace RentCar
 {
     public partial class AgregarInspeccion : Form
     {
-        SqlConnection con = null;
+        SqlConnection con = Conexion.getSqlConexion();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -27,10 +27,9 @@ namespace RentCar
         private void AgregarInspeccion_Load(object sender, EventArgs e)
         {
 
-            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
-            con.Open();
             //creacion de tabla intermedia
-
+            con = Conexion.getSqlConexion();
+            con.Open();
             DataTable tbl1 = new DataTable();
             DataTable tbl2 = new DataTable();
             DataTable tbl3 = new DataTable();
@@ -87,7 +86,7 @@ namespace RentCar
                 {
 
                 }
-                
+                con = Conexion.getSqlConexion();
                 con.Open();
                 string sql = " INSERT INTO InspeccionV (IdVehiculo,IdCliente,Ralladuras,CantidadCombustible,GomaRespuesto,Gato,RoturaCristal,EstadoGomas,FechaInspeccion,IdEmpleado) VALUES (@IdVehiculo,@IdCliente, @Ralladuras,@CantidadCombustible,@GomaRespuesto,@Gato,@RoturaCristal,@EstadoGomas,@FechaInspeccion,@IdEmpleado) ";
                 SqlCommand comando = new SqlCommand(sql, con);

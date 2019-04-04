@@ -14,8 +14,8 @@ namespace RentCar
 {
     public partial class AgregarMarca : Form
     {
-        SqlConnection con = null;
         
+        SqlConnection con = Conexion.getSqlConexion();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -30,10 +30,10 @@ namespace RentCar
         private void AgregarMarca_Load(object sender, EventArgs e)
         {
 
-            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
-            con.Open();
-            //creacion de tabla intermedia
 
+            //creacion de tabla intermedia
+            con = Conexion.getSqlConexion();
+            con.Open();
             DataTable tbl1 = new DataTable();
            
 
@@ -81,7 +81,8 @@ namespace RentCar
                 }
                 else
                 {
-                    
+
+                    con = Conexion.getSqlConexion();
                     con.Open();
                     string sql1 = " INSERT INTO Marca (Marca_Nombre) VALUES (@Marcanombre) ";
 
@@ -127,7 +128,8 @@ namespace RentCar
 
                 }
                 else {
-                    
+
+                    con = Conexion.getSqlConexion();
                     con.Open();
                     string sql1 = " INSERT INTO Modelo (Modelo_Nombre,Marca_Nombre) VALUES (@ModeloNombre,@Marcanombre) ";
 

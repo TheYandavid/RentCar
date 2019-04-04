@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
+using RentCar.Clases;
 
 namespace RentCar
 {
@@ -17,7 +18,8 @@ namespace RentCar
 
     
         private string fecha_inicio, Fecha_Fin;
-        SqlConnection con = null;
+        SqlConnection con = Conexion.getSqlConexion();
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -30,7 +32,8 @@ namespace RentCar
         private void Rentar_Load(object sender, EventArgs e)
         {
             mostrarTabla();
-            cargarCombobox();
+            
+          
 
             
 
@@ -54,12 +57,14 @@ namespace RentCar
             }
             else
             {
+
+
                 try
                 {
-                    con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
-                    con.Open();
+                    if (con.State != ConnectionState.Open)
+                        con.Open();
                     string sql = "INSERT INTO Renta (IdVehiculo,IdEmpleado,IdCliente,FechaRenta,DepositoRenta,MontoXdia,CantidadDias,Comentario,FechaDevolucion) VALUES (@IdVehiculo,@IdEmpleado,@IdCliente,@FechaRenta,@DepositoRenta,@MontoXdia,@CantidadDias,@Comentario,@FechaDevolucion)";
-                    string sql2 = "UPDATE Vehiculos SET Disponibilidad  = 'Rentado' where IdVehiculos = " + "'" + CmbIdVehiculo.Text + "'" + "";
+                    string sql2 = "UPDATE Vehiculos SET Disponibilidad  = 'Rentado' where IdVehiculos = " + "'" + CmbIdVehiculo.SelectedValue + "'" + "";
                     SqlCommand comando = new SqlCommand(sql, con);
                     SqlCommand comando2 = new SqlCommand(sql2, con);
 
@@ -100,8 +105,7 @@ namespace RentCar
 
         private void cargarCombobox()
         {
-
-            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            con = Conexion.getSqlConexion();
             con.Open();
             //creacion de tabla intermedia
 
@@ -168,8 +172,8 @@ namespace RentCar
         {
             try
             {
-                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
-                con.Open();
+                if (con.State != ConnectionState.Open)
+                    con.Open();
                 string sql = "select * from Vehiculos";
                 sql += " where IdVehiculos LIKE '" + CmbMarca.SelectedValue + "%' ";
                 SqlDataAdapter da = new SqlDataAdapter(sql, con);
@@ -190,8 +194,8 @@ namespace RentCar
         private void mostrarTabla()
         {
 
-            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
-            con.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             string sql = "select * from Vehiculos";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
             DataTable dt = new DataTable();
@@ -236,13 +240,7 @@ namespace RentCar
         {
             
             
-            valdiarDis();
-           
-        }
-
-        private void valdiarDis() {
-
-            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            con = Conexion.getSqlConexion();
             con.Open();
             string sqlLogin = "Select Disponibilidad from Vehiculos where Disponibilidad = 'Disponible' and  IdVehiculos =" + "'" + CmbIdVehiculo.SelectedValue + "'" + " ";
             SqlDataAdapter sda = new SqlDataAdapter(sqlLogin, con);
@@ -257,29 +255,38 @@ namespace RentCar
 
 
 
-                frmRentar.BtRentar.Enabled = true;
-               
+
+
                 MessageBox.Show("Disponible");
 
-
+                BtRentar.Enabled = true;
             }
 
 
             else
             {
-                Rentar frmRentar = new Rentar();
                
-                
-                
+
+
+
                 MessageBox.Show("Ese vehiculo no esta disponible");
+                BtRentar.Enabled = false;
+                
+
             }
+
+
 
 
         }
 
+        
+
+        
+
         private void CmbIdVehiculo_Click(object sender, EventArgs e)
         {
-           
+            cargarCombobox();
         }
 
         private void Rentar_MouseDown(object sender, MouseEventArgs e)
@@ -291,6 +298,11 @@ namespace RentCar
         private void BtSalir_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dgvVehiculos_Click(object sender, EventArgs e)
+        {
+            dgvVehiculos.Refresh();
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)

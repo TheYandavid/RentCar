@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
+using RentCar.Clases;
 
 namespace RentCar
 {
     public partial class AgregarVehiculo : Form
     {
-        SqlConnection con = null;
-        
+
+        SqlConnection con = Conexion.getSqlConexion();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -43,8 +44,9 @@ namespace RentCar
                 else
                 {
 
-                   con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True"); 
-                    con.Open();
+                    if (con.State != ConnectionState.Open)
+                        con.Open();
+
                     string sql1 = " INSERT INTO Vehiculos (MarcaVehiculos,ModeloVehiculos,TipoCombustible,TipoVehiculo,NoChasis,NoMotor,NoPlaca,DescripcionVehiculo,Disponibilidad) VALUES (@MarcaVehiculos,@ModeloVehiculos,@TipoCombustible, @TipoVehiculo,@Nochasis,@NoMotor,@NoPlaca,@Descripcion,@Disponibilidad) ";
                     //string sql2 = " INSERT INTO Marca (Marca_Nombre, Modelo_Nombre) VALUES (@MarcaNombre, @ModeloNombre) ";
                     SqlCommand comando1 = new SqlCommand(sql1, con);
@@ -93,8 +95,8 @@ namespace RentCar
         {
             try
             {
-                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
-                con.Open();
+                if (con.State != ConnectionState.Open)
+                    con.Open();
                 //creacion de tabla intermedia
                 DataTable tbl1 = new DataTable();
                 string sql1 = "select Marca_Nombre from Marca";
@@ -141,8 +143,9 @@ namespace RentCar
 
         private void CmbMarca_SelectionChangeCommitted(object sender, EventArgs e)
         {
-           
-            con.Open();
+
+            if (con.State != ConnectionState.Open)
+                con.Open();
 
             DataTable tbl2 = new DataTable();
 

@@ -98,7 +98,7 @@ namespace RentCar
         private void rentarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Rentar frmRentar = new Rentar();
-            frmRentar.BtRentar.Enabled = false;
+            
      
             frmRentar.ShowDialog();
 

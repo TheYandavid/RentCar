@@ -10,13 +10,14 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using RentCar.Clases;
 
 namespace RentCar
 {
     public partial class RegistrarEmpleado : Form
     {
 
-        SqlConnection con = null;
+        SqlConnection con = Conexion.getSqlConexion();
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -50,7 +51,8 @@ namespace RentCar
 
                 try
                 {
-
+                    if (con.State != ConnectionState.Open)
+                        con.Open();
 
 
                     con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
@@ -129,8 +131,8 @@ namespace RentCar
 
         private void cargarcmb() {
 
-            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
-            con.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             DataTable tbl2 = new DataTable();
             string sql2 = "select IdEmpleado from Empleado";
             SqlCommand cmd2 = new SqlCommand(sql2, con);
