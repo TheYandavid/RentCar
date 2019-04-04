@@ -328,6 +328,7 @@
             this.dgvVehiculos.ReadOnly = true;
             this.dgvVehiculos.Size = new System.Drawing.Size(697, 169);
             this.dgvVehiculos.TabIndex = 0;
+            this.dgvVehiculos.Click += new System.EventHandler(this.dgvVehiculos_Click);
             // 
             // BtSalir
             // 

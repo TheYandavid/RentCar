@@ -7,22 +7,16 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Configuration;
 
+
 namespace RentCar.Clases
 {
     class Conexion
     {
-      /* 
-       // static string connectionStr = ConfigurationManager.ConnectionStrings["RentCar.Properties.Settings.RentCarConnectionString"].ConnectionString;
-
-        
-       public static SqlConnection getSqlConexion()
+        static string connectionStr = ConfigurationManager.ConnectionStrings["RentCar.Properties.Settings.RentCarConnectionString"].ConnectionString;
+        public static SqlConnection getSqlConexion()
         {
-           
-          
-           
-        //    return new SqlConnection(connectionStr);
-
+            return new SqlConnection(connectionStr);
         }
-        */
     }
 }
+

@@ -9,13 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
+using RentCar.Clases;
+
 
 namespace RentCar
 {
     public partial class EditarInspeccion : Form
     {
 
-        SqlConnection con = null;
+        SqlConnection con = Conexion.getSqlConexion();
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -35,12 +38,12 @@ namespace RentCar
             {
                 try
                 {
-                    con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+
+                    con = Conexion.getSqlConexion();
                     con.Open();
                     string sqlUpdate = "UPDATE InspeccionV  SET IdVehiculo = " + "'" + CmbIdVehiculo.SelectedValue + "'" + ", IdCliente = " + "'" + CmbIdCliente.SelectedValue + "'" + ", Ralladuras = " + "'" + CmbRalladuras.Text + "'" + ", CantidadCombustible = " + "'" + CmbCombustible.Text + "'" + ", GomaRespuesto = " + "'" + CmbGomaRepuesto.Text + "'" + ",Gato = " + "'" + CmbGato.Text + "'" + "'" + ",RoturaCristal = " + "'" + CmbRoturaCristal.Text + "'" + ",EstadoGomas = " + "'" + CmbEstadoGomas.Text + "'" + ",FechaInspeccion = " + "'" + DtpFechaInspeccion.Value.ToString("yyyy/M/d") + "'" + ",IdEmpleado = " + "'" + CmbIdEmpleado.Text + "where IdInspeccion = " + "'" + cmbIDInsp.SelectedValue + "'" + " ";
                     SqlCommand comando = new SqlCommand(sqlUpdate, con);
                     comando.ExecuteNonQuery();
-
 
                     MessageBox.Show("Registro Actualizado");
                 }
@@ -57,11 +60,11 @@ namespace RentCar
 
         private void cargarCombobox() {
 
-            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            con = Conexion.getSqlConexion();
             con.Open();
             //creacion de tabla intermedia
 
-           
+
             DataTable tbl4 = new DataTable();
 
 
@@ -110,7 +113,7 @@ namespace RentCar
         {
              try
             {
-                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+                con = Conexion.getSqlConexion();
                 con.Open();
 
                 DataTable tbl1 = new DataTable();

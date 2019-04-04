@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
+using RentCar.Clases;
 
 namespace RentCar
 {
     public partial class ListaClientes : Form
     {
-        SqlConnection con = null;
+        SqlConnection con = Conexion.getSqlConexion();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -38,8 +39,8 @@ namespace RentCar
             try
             {
 
-                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
-                con.Open();
+                if (con.State != ConnectionState.Open)
+                    con.Open();
                 string sql = "DELETE FROM Cliente WHERE IdCliente = " + "'" + TxtId.Text + "'" + "";
                 SqlCommand comando = new SqlCommand(sql, con);
                 comando.ExecuteNonQuery();
@@ -64,8 +65,8 @@ namespace RentCar
         {
 
 
-            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
-            con.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             string sql = "select * from Cliente";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
             DataTable dt = new DataTable();

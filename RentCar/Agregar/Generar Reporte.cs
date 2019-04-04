@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
 using System.Data.SqlClient;
 using RentCar.Clases;
@@ -18,8 +16,7 @@ namespace RentCar.Agregar
 {
     public partial class Generar_Reporte : Form
     {
-
-        SqlConnection con = null;
+        SqlConnection con = Conexion.getSqlConexion();  
         DataTable dt = new DataTable();
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -79,8 +76,8 @@ namespace RentCar.Agregar
 
         private void cargartabla() {
 
-            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
-            con.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             string SQL = "select * from Renta ";
             
 
