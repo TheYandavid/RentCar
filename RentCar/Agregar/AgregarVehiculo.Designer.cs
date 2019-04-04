@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarVehiculo));
             this.TxtNuChasis = new System.Windows.Forms.TextBox();
             this.TxtNuMotor = new System.Windows.Forms.TextBox();
-            this.TxtTipoVehiculo = new System.Windows.Forms.TextBox();
             this.TxtDescVehiculo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,6 +48,7 @@
             this.CmbTipoCombustible = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.BtSalir = new System.Windows.Forms.Button();
+            this.TxtTipoVehiculo = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,13 +67,6 @@
             this.TxtNuMotor.Size = new System.Drawing.Size(273, 20);
             this.TxtNuMotor.TabIndex = 8;
             this.TxtNuMotor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNuMotor_KeyPress);
-            // 
-            // TxtTipoVehiculo
-            // 
-            this.TxtTipoVehiculo.Location = new System.Drawing.Point(165, 102);
-            this.TxtTipoVehiculo.Name = "TxtTipoVehiculo";
-            this.TxtTipoVehiculo.Size = new System.Drawing.Size(273, 20);
-            this.TxtTipoVehiculo.TabIndex = 9;
             // 
             // TxtDescVehiculo
             // 
@@ -234,6 +227,13 @@
             this.BtSalir.UseVisualStyleBackColor = true;
             this.BtSalir.Click += new System.EventHandler(this.BtSalir_Click);
             // 
+            // TxtTipoVehiculo
+            // 
+            this.TxtTipoVehiculo.Location = new System.Drawing.Point(165, 102);
+            this.TxtTipoVehiculo.Name = "TxtTipoVehiculo";
+            this.TxtTipoVehiculo.Size = new System.Drawing.Size(273, 20);
+            this.TxtTipoVehiculo.TabIndex = 9;
+            // 
             // AgregarVehiculo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -271,7 +271,6 @@
         #endregion
         private System.Windows.Forms.TextBox TxtNuChasis;
         private System.Windows.Forms.TextBox TxtNuMotor;
-        private System.Windows.Forms.TextBox TxtTipoVehiculo;
         private System.Windows.Forms.TextBox TxtDescVehiculo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -289,5 +288,6 @@
         private System.Windows.Forms.ComboBox CmbTipoCombustible;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button BtSalir;
+        private System.Windows.Forms.TextBox TxtTipoVehiculo;
     }
 }

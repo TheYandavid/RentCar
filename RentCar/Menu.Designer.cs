@@ -46,6 +46,8 @@
             this.generarReporteDeRentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.BtSalir = new System.Windows.Forms.Button();
+            this.empleadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listaDeEmpleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -58,7 +60,8 @@
             this.clientesToolStripMenuItem1,
             this.rentaToolStripMenuItem,
             this.inspeccionToolStripMenuItem,
-            this.reportesToolStripMenuItem});
+            this.reportesToolStripMenuItem,
+            this.empleadoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -133,14 +136,14 @@
             // historialRentasToolStripMenuItem
             // 
             this.historialRentasToolStripMenuItem.Name = "historialRentasToolStripMenuItem";
-            this.historialRentasToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.historialRentasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.historialRentasToolStripMenuItem.Text = "Historial rentas";
             this.historialRentasToolStripMenuItem.Click += new System.EventHandler(this.historialRentasToolStripMenuItem_Click);
             // 
             // rentarToolStripMenuItem
             // 
             this.rentarToolStripMenuItem.Name = "rentarToolStripMenuItem";
-            this.rentarToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.rentarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.rentarToolStripMenuItem.Text = "Rentar";
             this.rentarToolStripMenuItem.Click += new System.EventHandler(this.rentarToolStripMenuItem_Click);
             // 
@@ -195,6 +198,21 @@
             this.BtSalir.UseVisualStyleBackColor = true;
             this.BtSalir.Click += new System.EventHandler(this.BtSalir_Click);
             // 
+            // empleadoToolStripMenuItem
+            // 
+            this.empleadoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listaDeEmpleadosToolStripMenuItem});
+            this.empleadoToolStripMenuItem.Name = "empleadoToolStripMenuItem";
+            this.empleadoToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
+            this.empleadoToolStripMenuItem.Text = "Empleado";
+            // 
+            // listaDeEmpleadosToolStripMenuItem
+            // 
+            this.listaDeEmpleadosToolStripMenuItem.Name = "listaDeEmpleadosToolStripMenuItem";
+            this.listaDeEmpleadosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listaDeEmpleadosToolStripMenuItem.Text = "Lista de empleados";
+            this.listaDeEmpleadosToolStripMenuItem.Click += new System.EventHandler(this.listaDeEmpleadosToolStripMenuItem_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -233,5 +251,7 @@
         private System.Windows.Forms.ToolStripMenuItem generarReporteDeRentasToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button BtSalir;
+        private System.Windows.Forms.ToolStripMenuItem empleadoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listaDeEmpleadosToolStripMenuItem;
     }
 }

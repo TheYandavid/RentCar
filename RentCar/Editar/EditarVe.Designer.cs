@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarVe));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BtSalir = new System.Windows.Forms.Button();
             this.cmbID = new System.Windows.Forms.ComboBox();
             this.Bteditar = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -57,7 +56,6 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.BtSalir);
             this.panel1.Controls.Add(this.cmbID);
             this.panel1.Controls.Add(this.Bteditar);
             this.panel1.Controls.Add(this.label8);
@@ -84,16 +82,6 @@
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
-            // 
-            // BtSalir
-            // 
-            this.BtSalir.Location = new System.Drawing.Point(486, 441);
-            this.BtSalir.Name = "BtSalir";
-            this.BtSalir.Size = new System.Drawing.Size(75, 42);
-            this.BtSalir.TabIndex = 46;
-            this.BtSalir.Text = "Salir";
-            this.BtSalir.UseVisualStyleBackColor = true;
-            this.BtSalir.Click += new System.EventHandler(this.BtSalir_Click);
             // 
             // cmbID
             // 
@@ -311,7 +299,6 @@
         private System.Windows.Forms.TextBox TxtTipoVehiculo;
         private System.Windows.Forms.TextBox TxtNuMotor;
         private System.Windows.Forms.TextBox TxtNuChasis;
-        private System.Windows.Forms.Button BtSalir;
         private System.Windows.Forms.Button button1;
     }
 }

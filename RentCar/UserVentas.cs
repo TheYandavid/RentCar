@@ -54,5 +54,10 @@ namespace RentCar
         {
 
         }
+
+        private void BtSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

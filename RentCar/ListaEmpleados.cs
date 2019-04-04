@@ -12,25 +12,16 @@ using System.Runtime.InteropServices;
 
 namespace RentCar
 {
-    public partial class ListaClientes : Form
+    public partial class ListaEmpleados : Form
     {
         SqlConnection con = null;
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hwnd, int wnsg, int wparm, int lparam);
-        public ListaClientes()
+        public ListaEmpleados()
         {
             InitializeComponent();
-        }
-
-        private void ListaClientes_Load(object sender, EventArgs e)
-        {
-           
-
-
-            cargarTabla();
-
         }
 
         private void BtEliminar_Click(object sender, EventArgs e)
@@ -40,13 +31,15 @@ namespace RentCar
 
                 con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
                 con.Open();
-                string sql = "DELETE FROM Cliente WHERE IdCliente = " + "'" + TxtId.Text + "'" + "";
+                string sql = "DELETE FROM Empleado WHERE IdEmpleado = " + "'" + cmbIdempleado.Text + "'" + "";
                 SqlCommand comando = new SqlCommand(sql, con);
                 comando.ExecuteNonQuery();
 
 
                 MessageBox.Show("Registro Borrado");
-                Dgvclientes.Refresh();
+                dtgEmpleados.Hide();
+                dtgEmpleados.Refresh();
+                dtgEmpleados.Show();
                 this.Close();
                 con.Close();
             }
@@ -56,41 +49,57 @@ namespace RentCar
                 MessageBox.Show(ex.Message);
 
             }
-
-
-
         }
-        private void cargarTabla()
-        {
-
+        private void cargardtg() {
 
             con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
             con.Open();
-            string sql = "select * from Cliente";
+            string sql = "select * from Empleado";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
             DataTable dt = new DataTable();
             da.Fill(dt);
-            Dgvclientes.DataSource = dt;
-            Dgvclientes.Refresh();
-            
+            dtgEmpleados.DataSource = dt;
+            dtgEmpleados.Refresh();
+
             con.Close();
 
+
+
+
+
         }
 
-        private void BtActualizar_Click(object sender, EventArgs e)
+        private void BtEditar_Click(object sender, EventArgs e)
         {
-
-            Registro frmRegistro = new Registro();
-            frmRegistro.BtRegistrar.Visible = false;
-            frmRegistro.ShowDialog();
+            RegistrarEmpleado frmRegistrarEmpleado = new RegistrarEmpleado();
+            frmRegistrarEmpleado.BtRegistrar.Visible = false;
+            frmRegistrarEmpleado.ShowDialog();
         }
 
-        private void TxtId_KeyPress(object sender, KeyPressEventArgs e)
+        private void ListaEmpleados_Load(object sender, EventArgs e)
         {
-            Validar.SoloNumeros(e);
+            cargardtg();
+            cargarcmb();
+        }
+        private void cargarcmb() {
+
+            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+            con.Open();
+            //creacion de tabla intermedia
+            DataTable tbl1 = new DataTable();
+            string sql1 = "select IdEmpleado,NombreEmpleado from Empleado";
+            SqlCommand cmd1 = new SqlCommand(sql1, con);
+            SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+            da1.Fill(tbl1);
+
+            //Llenado Combo box Vehiculos
+            cmbIdempleado.DisplayMember = "NombreEmpleado";
+            cmbIdempleado.ValueMember = "IdEmpleado";
+            cmbIdempleado.DataSource = tbl1;
+
         }
 
-        private void ListaClientes_MouseDown(object sender, MouseEventArgs e)
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);

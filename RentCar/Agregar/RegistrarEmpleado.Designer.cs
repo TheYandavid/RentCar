@@ -46,6 +46,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.BtRegistrar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btEditar = new System.Windows.Forms.Button();
+            this.LbIDempledo = new System.Windows.Forms.Label();
+            this.cmbIdEmpleado = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -53,7 +56,7 @@
             // 
             // TxtNombre
             // 
-            this.TxtNombre.Location = new System.Drawing.Point(158, 14);
+            this.TxtNombre.Location = new System.Drawing.Point(158, 38);
             this.TxtNombre.Name = "TxtNombre";
             this.TxtNombre.Size = new System.Drawing.Size(161, 20);
             this.TxtNombre.TabIndex = 0;
@@ -61,12 +64,11 @@
             // 
             // TxtCedula
             // 
-            this.TxtCedula.Location = new System.Drawing.Point(158, 53);
+            this.TxtCedula.Location = new System.Drawing.Point(158, 68);
             this.TxtCedula.Name = "TxtCedula";
             this.TxtCedula.Size = new System.Drawing.Size(161, 20);
             this.TxtCedula.TabIndex = 1;
             this.TxtCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtCedula_KeyPress);
-            this.TxtCedula.Validating += new System.ComponentModel.CancelEventHandler(this.TxtCedula_Validating);
             // 
             // TxtPorcientoComision
             // 
@@ -79,7 +81,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 60);
+            this.label2.Location = new System.Drawing.Point(24, 75);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(40, 13);
             this.label2.TabIndex = 8;
@@ -124,7 +126,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 14);
+            this.label1.Location = new System.Drawing.Point(24, 45);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 7;
@@ -132,6 +134,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.LbIDempledo);
+            this.panel1.Controls.Add(this.btEditar);
             this.panel1.Controls.Add(this.cmbEstado);
             this.panel1.Controls.Add(this.dateTimePicker1);
             this.panel1.Controls.Add(this.cmbTanda);
@@ -226,6 +230,38 @@
             this.panel2.TabIndex = 14;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             // 
+            // btEditar
+            // 
+            this.btEditar.Location = new System.Drawing.Point(27, 314);
+            this.btEditar.Name = "btEditar";
+            this.btEditar.Size = new System.Drawing.Size(119, 44);
+            this.btEditar.TabIndex = 21;
+            this.btEditar.Text = "Editar";
+            this.btEditar.UseVisualStyleBackColor = true;
+            this.btEditar.Click += new System.EventHandler(this.btEditar_Click_1);
+            // 
+            // LbIDempledo
+            // 
+            this.LbIDempledo.AutoSize = true;
+            this.LbIDempledo.Location = new System.Drawing.Point(24, 18);
+            this.LbIDempledo.Name = "LbIDempledo";
+            this.LbIDempledo.Size = new System.Drawing.Size(68, 13);
+            this.LbIDempledo.TabIndex = 22;
+            this.LbIDempledo.Text = "ID Empleado";
+            // 
+            // cmbIdEmpleado
+            // 
+            this.cmbIdEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbIdEmpleado.FormattingEnabled = true;
+            this.cmbIdEmpleado.Items.AddRange(new object[] {
+            "Nocturna",
+            "Tarde",
+            "Mañana"});
+            this.cmbIdEmpleado.Location = new System.Drawing.Point(170, 42);
+            this.cmbIdEmpleado.Name = "cmbIdEmpleado";
+            this.cmbIdEmpleado.Size = new System.Drawing.Size(121, 21);
+            this.cmbIdEmpleado.TabIndex = 23;
+            // 
             // button1
             // 
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
@@ -242,6 +278,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(393, 415);
+            this.Controls.Add(this.cmbIdEmpleado);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -275,5 +312,8 @@
         public System.Windows.Forms.Button BtRegistrar;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button btEditar;
+        public System.Windows.Forms.ComboBox cmbIdEmpleado;
+        public System.Windows.Forms.Label LbIDempledo;
     }
 }

@@ -98,7 +98,7 @@ namespace RentCar
         private void rentarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Rentar frmRentar = new Rentar();
-            frmRentar.BtRentar.Visible = false;
+            frmRentar.BtRentar.Enabled = false;
      
             frmRentar.ShowDialog();
 
@@ -132,6 +132,12 @@ namespace RentCar
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void listaDeEmpleadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListaEmpleados frmlistaEmpleados = new ListaEmpleados();
+            frmlistaEmpleados.ShowDialog();
         }
     }
 }

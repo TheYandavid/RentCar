@@ -15,7 +15,7 @@ namespace RentCar
     public partial class EditarInspeccion : Form
     {
 
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = null;
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -35,7 +35,7 @@ namespace RentCar
             {
                 try
                 {
-
+                    con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
                     con.Open();
                     string sqlUpdate = "UPDATE InspeccionV  SET IdVehiculo = " + "'" + CmbIdVehiculo.SelectedValue + "'" + ", IdCliente = " + "'" + CmbIdCliente.SelectedValue + "'" + ", Ralladuras = " + "'" + CmbRalladuras.Text + "'" + ", CantidadCombustible = " + "'" + CmbCombustible.Text + "'" + ", GomaRespuesto = " + "'" + CmbGomaRepuesto.Text + "'" + ",Gato = " + "'" + CmbGato.Text + "'" + "'" + ",RoturaCristal = " + "'" + CmbRoturaCristal.Text + "'" + ",EstadoGomas = " + "'" + CmbEstadoGomas.Text + "'" + ",FechaInspeccion = " + "'" + DtpFechaInspeccion.Value.ToString("yyyy/M/d") + "'" + ",IdEmpleado = " + "'" + CmbIdEmpleado.Text + "where IdInspeccion = " + "'" + cmbIDInsp.SelectedValue + "'" + " ";
                     SqlCommand comando = new SqlCommand(sqlUpdate, con);
@@ -51,12 +51,13 @@ namespace RentCar
                 }
 
             }
+
             con.Close();
         }
 
         private void cargarCombobox() {
 
-            
+            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
             con.Open();
             //creacion de tabla intermedia
 
@@ -109,7 +110,7 @@ namespace RentCar
         {
              try
             {
-                
+                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
                 con.Open();
 
                 DataTable tbl1 = new DataTable();

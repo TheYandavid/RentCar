@@ -14,7 +14,7 @@ namespace RentCar
 {
     public partial class EditarVe : Form
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = null;
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -30,7 +30,7 @@ namespace RentCar
             {
                 //Cargar Marca
 
-                
+                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
                 con.Open();
                 //creacion de tabla intermedia
                 DataTable tbl1 = new DataTable();
@@ -71,7 +71,7 @@ namespace RentCar
                 }
                 else
                 {
-                   
+                    con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
                     con.Open();
                     string sql1 = "UPDATE Vehiculos SET MarcaVehiculos = " + "'" + CmbMarca.SelectedValue + "'" + ", ModeloVehiculos = " + "'" + CmbModelo.SelectedValue + "'" + ", TipoCombustible = " + "'" + CmbTipoCombustible.Text + "'" + ", TipoVehiculo = " + "'" +TxtTipoVehiculo.Text + "'" + ", NoChasis = " + "'" + TxtNuChasis.Text + "'" + ",NoMotor= " + "'" + TxtNuMotor.Text + "'" + "'" + ",NoPlaca = " + "'" + TxtPlaca.Text + "'" + ",DescripcionVehiculo = " + "'" + TxtDescVehiculo + "'" + "where IdInspeccion = " + "'" + cmbID + "'" + " ";
                
@@ -92,7 +92,7 @@ namespace RentCar
 
         private void CmbMarca_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            
+            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
             con.Open();
 
             DataTable tbl2 = new DataTable();
@@ -119,7 +119,7 @@ namespace RentCar
             try
             {
                 // Cargado de Combo Box ID
-               
+                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
                 con.Open();
                 //creacion de tabla intermedia
                 DataTable tbl1 = new DataTable();
@@ -144,7 +144,7 @@ namespace RentCar
 
         private void cargarEdit()
         {
-            
+            con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
             con.Open();
             //creacion de tabla intermedia
             DataTable tbl1 = new DataTable();
@@ -173,7 +173,7 @@ namespace RentCar
 
         private void BtSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            
         }
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)

@@ -14,7 +14,8 @@ namespace RentCar
 {
     public partial class AgregarVehiculo : Form
     {
-        SqlConnection con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
+        SqlConnection con = null;
+        
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
@@ -35,14 +36,14 @@ namespace RentCar
         {
             try
             {
-                if (TxtNuChasis.Text == "" | TxtNuMotor.Text == "" | TxtPlaca.Text == "")
+                if (TxtNuChasis.Text == "" | TxtNuMotor.Text == "" | TxtPlaca.Text == "" | TxtTipoVehiculo.Text == "" | CmbTipoCombustible.Text == "" )
                 {
                     MessageBox.Show("Faltan campos por llenar", "Error");
                 }
                 else
                 {
 
-                    
+                   con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True"); 
                     con.Open();
                     string sql1 = " INSERT INTO Vehiculos (MarcaVehiculos,ModeloVehiculos,TipoCombustible,TipoVehiculo,NoChasis,NoMotor,NoPlaca,DescripcionVehiculo,Disponibilidad) VALUES (@MarcaVehiculos,@ModeloVehiculos,@TipoCombustible, @TipoVehiculo,@Nochasis,@NoMotor,@NoPlaca,@Descripcion,@Disponibilidad) ";
                     //string sql2 = " INSERT INTO Marca (Marca_Nombre, Modelo_Nombre) VALUES (@MarcaNombre, @ModeloNombre) ";
@@ -92,7 +93,7 @@ namespace RentCar
         {
             try
             {
-                
+                con = new SqlConnection("Data Source=DESKTOP-7UG5AJD\\SQLEXPRESS02;Initial Catalog=RentCar;Integrated Security=True");
                 con.Open();
                 //creacion de tabla intermedia
                 DataTable tbl1 = new DataTable();

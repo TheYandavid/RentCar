@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserVentas));
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BtRentar = new System.Windows.Forms.Button();
             this.btRegistCliente = new System.Windows.Forms.Button();
+            this.BtSalir = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -62,6 +64,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.panel2.Controls.Add(this.BtSalir);
             this.panel2.Controls.Add(this.BtRentar);
             this.panel2.Controls.Add(this.btRegistCliente);
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -88,6 +91,17 @@
             this.btRegistCliente.Text = "Registrar Cliente";
             this.btRegistCliente.UseVisualStyleBackColor = true;
             // 
+            // BtSalir
+            // 
+            this.BtSalir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BtSalir.BackgroundImage")));
+            this.BtSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtSalir.Location = new System.Drawing.Point(88, 289);
+            this.BtSalir.Name = "BtSalir";
+            this.BtSalir.Size = new System.Drawing.Size(42, 34);
+            this.BtSalir.TabIndex = 6;
+            this.BtSalir.UseVisualStyleBackColor = true;
+            this.BtSalir.Click += new System.EventHandler(this.BtSalir_Click);
+            // 
             // UserVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -112,5 +126,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button BtRentar;
         private System.Windows.Forms.Button btRegistCliente;
+        private System.Windows.Forms.Button BtSalir;
     }
 }
